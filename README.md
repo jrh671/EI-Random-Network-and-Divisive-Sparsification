@@ -11,3 +11,5 @@ Figure_1/1H_1I_PreRun_Data/ is a folder with files that should be saved in the a
 2) Each figure script provides an option to run new simulations instead of pre loading saved data. Each Figure folder contains a README with specific instructions for using the code.\
 \
 3) Several loading files need to be adjusted to set up the correct directory to the codebase. Instructions are in the README file of each figure.
+
+4) Article Link: https://www.biorxiv.org/content/10.1101/2025.10.04.680487v1
