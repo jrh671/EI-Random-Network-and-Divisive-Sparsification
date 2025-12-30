@@ -1,6 +1,8 @@
 %% EI Random NETWORK (Main)
 addpath('./Network_Functions');
-load('TwoPFs.mat')
+addpath('./PreRun_Data');
+load('./PreRun_Data/TwoPFs.mat')
+
 GenerateTuning=1;
 GenerateActivity=1;
 VisualizePlasticity=0;
