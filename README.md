@@ -8,7 +8,7 @@ Link to Data: (enter link here)\
 
 The Data folder contains the folder structure where the data should be saved, for example:\
 
-Figure_1/1H_1I_PreRun_Data/ is a folder with files that should be saved in the analogous folder of the codebase. In this repository, these folders have been left blank for files to be downloaded and placed by the user.\
+Figure_1/1H_1I_PreRun_Data/ is a folder that should contain files from the analagous data folder that should be saved in its respective "Figure_1/1H_1I_PreRun_Data/" folder in the codebase. In this repository, these folders have been left blank for files to be downloaded and placed by the user.\
 
 2) Each figure script provides an option to run new simulations instead of pre loading saved data. Each Figure folder contains a README with specific instructions for using the code.\
 
