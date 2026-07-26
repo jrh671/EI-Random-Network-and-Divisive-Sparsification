@@ -1,0 +1,17 @@
+These figures assume data from Figure 1 has been ran and saved and copied into this figure's PreRun_Folder
+
+To generate new Data for AB, run figure 1CD and save the relevant data in "1C_1D/PreRun_Data/". See figure 1 for more details.
+
+To generate new Data for CDEF, run FastTm.m from Figure 1F at inhibition of 0.05 with the following changes:
+
+For Unsaturated, leave the network unchanged.
+For Saturated input activity, add one spike per second randomly for each input neuron.
+
+Save the following variables in a file named "Results_Unsaturated.mat" or "Results_Saturated.mat":
+InputRates
+IntegerPos
+n_inhib
+n_input
+n_laps
+n_pos
+Rates
