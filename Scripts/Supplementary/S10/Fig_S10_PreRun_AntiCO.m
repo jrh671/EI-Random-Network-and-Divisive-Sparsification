@@ -5,10 +5,13 @@ AAB=1; %1 = No intermediate remapping. 0 = With intermediate remapping
 PairID=1; 
 
 if AAB==1
-    load('./PreRun_Data/StoreMemory_AAB.mat', 'TopPairs_AAB'); 
+    load('/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Data/Supplementary/S10/PreRun_Data/StoreMemory_AAB.mat', ...
+         'TopPairs_AAB'); 
+
     TopPairs=TopPairs_AAB;
 else
-    load('./PreRun_Data/StoreMemory_ABA.mat', 'TopPairs_ABA'); 
+    load('/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Data/Supplementary/S10/PreRun_Data/StoreMemory_ABA.mat', ...
+         'TopPairs_ABA'); 
     TopPairs=TopPairs_ABA;
 end
 

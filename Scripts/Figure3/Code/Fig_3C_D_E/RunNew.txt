@@ -1,0 +1,5 @@
+These codes use simulation results from figure 1F. 
+First be sure to include the correct directory in "LoadPreRun.m"
+Making sure to point to the PreRun_Data folder of Figure 1F.
+
+To Generate new data, rerun Figure 1F and store the saved files accordingly.

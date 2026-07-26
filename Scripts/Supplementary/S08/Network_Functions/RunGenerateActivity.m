@@ -9,7 +9,6 @@ recurrent_connections_CA3 = zeros(N, N);
 IsTrue=zeros(N,T);
 
 
-
 %Same Trajectory
 trajectory = levyFlightTrajectory(P, T);
 
@@ -77,13 +76,13 @@ firing_rates_CA3 = cellfun(@(x) max(x, 0), firing_rates_CA3, 'UniformOutput', fa
     active_neurons_CA3 = [];
     if all(pos > 0) && all(pos <= P) % Ensure the position is within bounds
         for i = 1:N
-            if firing_rates_CA3{i}(pos(1), pos(2)) > thresholdCA3
+            if firing_rates_CA3{i}(pos(1), pos(2)) > mu_rho*thresholdCA3
                 active_neurons_CA3 = [active_neurons_CA3, i];
             end
         end
     end
 
-    spikes=find(cellfun(@(fr) fr(pos(1), pos(2)) > thresholdCA3, firing_rates_CA3));
+    spikes=find(cellfun(@(fr) fr(pos(1), pos(2)) > mu_rho*thresholdCA3, firing_rates_CA3));
     Spikes(spikes,t)=ones(length(spikes),1);
 
 % Special location check with radius in CA3
@@ -204,16 +203,6 @@ end
 end
 
 
-if Plasticity==0
-     Trajectory1=trajectory;
-     FiringRates1=firing_rate_snapshots_CA3;
-     Rates=firing_rate_snapshots_CA3;
-else
-     Trajectory2=trajectory;
-     FiringRates2=firing_rate_snapshots_CA3;
-     Rates=firing_rate_snapshots_CA3;
-end
-
 
 
 % Calculate the average activity at the special location for CA3
@@ -222,11 +211,12 @@ avg_activity_at_special_location_CA3 = avg_activity_at_special_location_CA3 / T;
 % Find the top 4 neurons with the highest average activity at the special location for CA3
 [~, sorted_indices_CA3] = sort(avg_activity_at_special_location_CA3, 'descend');
 
-Sorting=sorted_indices_CA3;
+
 chosen_neurons_CA3 = sorted_indices_CA3(3:6);
 chosen_neurons_CA3(3:4) = Choose2NeuronsCA3;
 
 
+TemporalSpikes = Spikes;
 % Function to generate a PxP trajectory using Lévy flight
 function trajectory = levyFlightTrajectory(P, numTimePoints)
     trajectory = zeros(numTimePoints, 2);

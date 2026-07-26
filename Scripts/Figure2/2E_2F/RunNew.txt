@@ -1,0 +1,27 @@
+To Run generate new data, run EIRandom_Main_Fast.m or EIRandom_Main_Slow.m
+
+Save two files for each simulation:
+
+1) InData.mat
+
+Containing: 
+
+InputSpikes split into two variables (shown below)
+
+InputSpikes1 and InputSpikes2 
+(First half and Second half of simulation).
+
+2) OutData.mat
+
+Containing: 
+
+UnitAdjInhibIE
+UnitAdjInput
+VmE
+W_inputE
+dt
+neuron_indices
+positions
+spike_mat_excit
+C
+UnitAdjInhibEI

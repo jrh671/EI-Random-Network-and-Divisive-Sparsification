@@ -1,6 +1,5 @@
 %% Optimized Simulation of Recurrent and Skip Connections
 
-if Epoch == 1 || Epoch == 0
 % Initialize variables and connections
 % recurrent_connections_CA3 = zeros(N, N);
 memory_neurons_CA3 = false(1, N);
@@ -9,7 +8,7 @@ MCells=find(memory_neurons_CA3==1);
 recurrent_connections_CA3 = zeros(N, N);
 IsTrue=zeros(N,T);
 
-end
+
 
 %Same Trajectory
 trajectory = levyFlightTrajectory(P, T);
@@ -204,19 +203,17 @@ end
     firing_rate_snapshots_CA3{t} = snapshot_CA3;
 end
 
-if Context==1 && Epoch ==2
-    TagTime1=IsTrue;
-     Memory1=memory_neurons_CA3;
+
+if Plasticity==0
      Trajectory1=trajectory;
      FiringRates1=firing_rate_snapshots_CA3;
-
-elseif Context==2 && Epoch ==2
-    TagTime2=IsTrue;
-     Memory2=memory_neurons_CA3;
+     Rates=firing_rate_snapshots_CA3;
+else
      Trajectory2=trajectory;
      FiringRates2=firing_rate_snapshots_CA3;
-
+     Rates=firing_rate_snapshots_CA3;
 end
+
 
 
 % Calculate the average activity at the special location for CA3
@@ -225,7 +222,7 @@ avg_activity_at_special_location_CA3 = avg_activity_at_special_location_CA3 / T;
 % Find the top 4 neurons with the highest average activity at the special location for CA3
 [~, sorted_indices_CA3] = sort(avg_activity_at_special_location_CA3, 'descend');
 
-
+Sorting=sorted_indices_CA3;
 chosen_neurons_CA3 = sorted_indices_CA3(3:6);
 chosen_neurons_CA3(3:4) = Choose2NeuronsCA3;
 

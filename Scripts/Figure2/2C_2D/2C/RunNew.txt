@@ -1,0 +1,55 @@
+To generate new data, copy files in "Parallel" folder into a suitable 
+cluster, in order to run simulations in Parallel using Slurm and the .sh files
+provided. Note the Fast time constant simulations take much longer than 
+the slow time constant networks. 
+
+For Figure 2C. 4 sets of simulation were ran by adjusting the W_IE and W_EI 
+definitions as shown below:
+
+1) Slow time constant inhibition range 0 to 0.3, step 0.015
+
+Code in SlowTm_Parallel.m 
+W_IE = ((Ohm-1)*0.015)*ones(n_inhib,n_excit);
+W_EI = ((Ohm-1)*0.015)*ones(n_excit,n_inhib);
+
+Save as:
+
+pf_cellC ---> Save as PF_CellSlow1.mat
+results ---> Save as resultsSlow1.mat
+W_inputECell ---> Save as W_inputESlow1.mat
+
+2) Slow time constant inhibition range 0 to 0.1, step 0.005
+
+Code in SlowTm_Parallel.m 
+W_IE = ((Ohm-1)*0.005)*ones(n_inhib,n_excit);
+W_EI = ((Ohm-1)*0.005)*ones(n_excit,n_inhib);
+
+Save as:
+
+pf_cellC ---> Save as PF_CellSlow2.mat
+results ---> Save as resultsSlow2.mat
+W_inputECell ---> Save as W_inputESlow2.mat
+
+3) Fast time constant inhibition range: 0 to 0.5, step 0.025
+
+Code in FastTm_Parallel.m 
+W_IE = ((Ohm-1)*0.025)*ones(n_inhib,n_excit);
+W_EI = ((Ohm-1)*0.025)*ones(n_excit,n_inhib);
+
+Save as:
+
+pf_cellC ---> Save as PF_CellFast1.mat
+results ---> Save as resultsFast1.mat
+W_inputECell ---> Save as W_inputEFast1.mat
+
+4) Fast time constant inhibition range: 0 to 0.3, step 0.015
+
+Code in FastTm_Parallel.m 
+W_IE = ((Ohm-1)*0.015)*ones(n_inhib,n_excit);
+W_EI = ((Ohm-1)*0.015)*ones(n_excit,n_inhib);
+
+Save as:
+
+pf_cellC ---> Save as PF_CellFast2.mat
+results ---> Save as resultsFast2.mat
+W_inputECell ---> Save as W_inputEFast2.mat

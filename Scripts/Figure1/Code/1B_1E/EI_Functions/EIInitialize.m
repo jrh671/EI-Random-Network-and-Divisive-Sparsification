@@ -11,7 +11,8 @@
         W_upper_limit = 0.5;
 
         pf_rate = 12; % Input neuron rate (in Hz) at center of pf
-        pf_width = 10; % Controls Gaussian pf width pf_width = (1/Sigma^2)
+
+        pf_width_= .3162; %Place field width
         alpha_P = 0; %Noise Input
         alpha_Pe = 0; %Noise E
         alpha_Pi = 0; %Noise I

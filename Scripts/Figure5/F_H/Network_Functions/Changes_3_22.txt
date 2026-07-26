@@ -1,0 +1,5 @@
+0) Fig_4FEGH PreLoad set to 0
+1) RunGenerateActivity ---> Change Weight Minus to + instead of - "Made Symmetric"
+2) SetParameters4D ---> Change WeightMinus to 0.01 from 1 and WeightPlus to 0.01 from 0.1
+3) ThresholdCA3 and Decay rate changes from 0.35 to 0.75
+4) WeightScaleCA3 make 0.1 from 0.35

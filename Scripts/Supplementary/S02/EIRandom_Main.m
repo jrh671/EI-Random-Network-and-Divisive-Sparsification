@@ -99,8 +99,8 @@ elseif PreRunData==1
     addpath('./EI_Functions');
     addpath('./Helper_Functions');
     
-    load('/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Internal/Supplementary/S02/Data/Data.mat')
-    load('/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Internal/Supplementary/S02/Data/Sparsity.mat')
+    load('/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Data/Supplementary/S02/PreRun_Data/Data.mat')
+    load('/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Data/Supplementary/S02/PreRun_Data/Sparsity.mat')
 
 end
 

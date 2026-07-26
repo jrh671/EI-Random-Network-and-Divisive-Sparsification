@@ -1,3 +1,4 @@
+
 % Initialize temporal rates array
 temporal_rates_CA3 = zeros(N, T);
 
@@ -9,7 +10,7 @@ for W = 1%[30,80]%chosen_neurons_CA3(end-1)
     occupancy_map = zeros(P, P);
 
 for t = 1:T
-    firing_rates_CA3 = firing_rate_snapshots_CA3{t};
+    firing_rates_CA3 = FiringRates{t};
 
     % Get the current position in the trajectory
     pos = round(trajectory(t, :)); % Round to the nearest integer to use as indices

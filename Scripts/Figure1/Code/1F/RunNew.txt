@@ -1,0 +1,13 @@
+To generate new data, copy files in "Parallel" folder into a suitable 
+cluster, in order to run simulations in Parallel using Slurm and the .sh files
+provided. Note the Fast time constant simulations take much longer than 
+the slow time constant networks. 
+
+After running, save the following variables in the corresponding PreRun_Data 
+folder for this figure.
+
+Variables to save (Depending on Fast or Slow time constant choice):
+
+1) pf_cellC ---> Save as PF_CellFast.mat or PF_CellSlow.mat
+2) results ---> Save as resultsFast.mat or resultsSlow.mat
+3) W_inputECell ---> Save as W_inputEFast.mat or W_inputESlow.mat

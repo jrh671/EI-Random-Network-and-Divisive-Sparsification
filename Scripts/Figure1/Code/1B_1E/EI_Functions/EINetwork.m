@@ -1,8 +1,10 @@
+        pf_width = 1/pf_width_^2;
+        
+
         %% Run network simulation
         for tt = 1:length(total_time_vec)
             pos = positions(tt);
             dt = dt_vec(tt);
-
             if SimInputs == 1
                 input_prob_firing_vec = zeros(1, n_input);
                 for ii = 1:n_input
