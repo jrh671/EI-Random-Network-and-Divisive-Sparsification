@@ -1,12 +1,12 @@
-PreLoad=0;
+PreLoad=1;
 
 if PreLoad==1
 
-load(['/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Internal/' ...
+load(['/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Data/' ...
     'Supplementary/S04/Conductance_Model/PreRun_Data/Fast_Pos/ConductanceModel_Data.mat'], ...
     'spike_mat_excit')
 
-load('/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Internal/Supplementary/S04/Conductance_Model/PreRun_Data/Fast_Pos/ConductanceModel_Data.mat', 'positions')
+load('/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Data/Supplementary/S04/Conductance_Model/PreRun_Data/Fast_Pos/ConductanceModel_Data.mat', 'positions')
 end
 
 
@@ -29,5 +29,8 @@ figure;
 plot(IntegerPos(length(IntegerPos)-length(D_Pos_PVo)+1:end));hold on; plot(D_Pos_PVo, 'bo')
 xlabel('Time Point');ylabel("Location"); title('Decoding Position From Activity');legend('True Location','Predicted Location')
 
-figure;scatter(IntegerPos(length(IntegerPos)-length(D_Pos_PVo)+1:end),D_Pos_PVo);hold on;
-hold on;plot(linspace(0,n_pos,n_pos),linspace(0,n_pos,n_pos));xlabel('Predicted Location');ylabel("Actual Location"); title('Decoding Position From Activity')
+
+PosAveSheet=NS(Ordering,:);
+FRSheet=FiringRate(neuron_indices,:);
+DecodeSheet_True=IntegerPos(length(IntegerPos)-length(D_Pos_PVo)+1:end)';
+DecodeSheet_Pred=D_Pos_PVo';

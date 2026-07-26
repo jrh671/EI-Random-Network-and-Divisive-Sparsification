@@ -42,7 +42,7 @@ for t = 1:Time
     end
 
     % Add inhomogeneous and non-uniform homogeneous Poisson activity
-    Activity(:, t) = Rates.*poissrnd(mixture_gaussians) + poissrnd(homogeneous_rates);
+    Activity(:, t) = Rates.*poissrnd(mixture_gaussians) + poissrnd(homogeneous_rates).^3;
 
 end
 

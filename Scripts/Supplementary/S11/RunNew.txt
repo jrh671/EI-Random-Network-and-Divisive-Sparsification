@@ -1,0 +1,5 @@
+To Generate new data, run Simulate_All_Trials. 
+This will reproduce figure S11b and S11c summary plots
+
+To run S11b and S11c from preloaded data, run MemoryStoreAntiCofiring_Diff.m
+found in the Network_Functions subfolder. set PreLoadData=1.

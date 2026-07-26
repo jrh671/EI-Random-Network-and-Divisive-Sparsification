@@ -1,5 +1,6 @@
 
 if PreLoadData==1
+
     J_Count=2;
 else
     J_Count=AAB;
@@ -11,9 +12,9 @@ AAB=J-1;
 
 if PreLoadData==1
     if AAB==1
-    load('/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Internal/Supplementary/S09/PreRun_Data/StoreMemory_AAB.mat')
+    load('/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Data/Supplementary/S11/PreRun_Data/StoreMemory_AAB.mat')
     else
-    load('/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Internal/Supplementary/S09/PreRun_Data/StoreMemory_ABA.mat')
+    load('/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Data/Supplementary/S11/PreRun_Data/StoreMemory_ABA.mat')
     end
 end
 

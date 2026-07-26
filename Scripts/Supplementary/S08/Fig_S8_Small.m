@@ -1,6 +1,5 @@
 %% EI Random NETWORK (Main)
 addpath('./Network_Functions');
-load('LargePFs.mat')
 GenerateTuning=1;
 GenerateActivity=1;
 VisualizePlasticity=0;
@@ -48,7 +47,6 @@ Visualize2DMaps;
 PlaceCellStats;
 
 SmallPFs1=find(numPeaks>0);
-commonValues1 = intersect(SpecialPFs, SmallPFs1)
 
 % Remapping Function
 Seed=seed2;
@@ -65,4 +63,3 @@ Visualize2DMaps;
 PlaceCellStats;
 
 SmallPFs2=find(numPeaks>0);
-commonValues2 = intersect(SpecialPFs, SmallPFs2)

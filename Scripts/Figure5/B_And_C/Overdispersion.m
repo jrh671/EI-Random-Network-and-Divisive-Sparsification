@@ -142,12 +142,15 @@ for dataset_idx = 1:2
 
     legend_entries{end+1} = dataset_names{dataset_idx}; %#ok<SAGROW>
 
+    SavePasses{dataset_idx}=pass_z;
 end
 
 x_values = linspace(-display_limit,display_limit,500);
 
 plot(x_values,normpdf(x_values,0,1), ...
     'k','LineWidth',2);
+
+SavePDF=normpdf(x_values,0,1)';
 
 legend_entries{end+1} = 'Independent-event expectation';
 
@@ -331,41 +334,7 @@ fprintf('Variance ratio, noisy/original: %.4f\n', ...
     variance_ratio);
 fprintf('====================================================\n');
 
-%% Plot the exact plasticity comparison used in the variance check
 
-figure;
-hold on;
-
-comparison_groups = [
-    ones(size(matched_without_noise))
-    2*ones(size(matched_with_noise))
-];
-
-comparison_values = [
-    matched_without_noise
-    matched_with_noise
-];
-
-if ~isempty(comparison_values)
-    boxchart(comparison_groups,comparison_values);
-end
-
-xlim([0.5 2.5]);
-xticks([1 2]);
-xticklabels({
-    'Plasticity: no noise'
-    sprintf('Plasticity: noise SD %.3g',activity_noise_std)
-});
-
-ylabel('Neuron-level overdispersion');
-title({ ...
-    'Effect of activity noise on final overdispersion'
-    sprintf('Variance change = %.4g (%.2f%%)', ...
-        variance_growth,percent_variance_growth)
-});
-
-box on;
-hold off;
 
 %% Local function: analyze one dataset
 

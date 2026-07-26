@@ -2,7 +2,7 @@ addpath('./Network_Functions');
 addpath('./PreRun_Data');
 
 AAB=1; %1 = No intermediate remapping. 0 = With intermediate remapping
-PairID=54; %% 1 For Fig S9a. #54 for Fig S9d.
+PairID=54; %% 1 For Fig S11a. #54 for Fig S11d.
 
 if AAB==1
     load('/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Data/Supplementary/S11/PreRun_Data/StoreMemory_AAB.mat', ...

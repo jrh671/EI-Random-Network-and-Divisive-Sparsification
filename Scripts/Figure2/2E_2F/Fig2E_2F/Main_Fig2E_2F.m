@@ -54,6 +54,13 @@ SlowData = bin_effective_vm_data(SlowData, edges);
 figure('Name','Effective Vm gain: Fast + Slow');
 hold on
 
+FastX=FastData.xc;
+FastY=FastData.ym;
+FastError=FastData.yse;
+SlowX=SlowData.xc;
+SlowY=SlowData.ym;
+SlowError=SlowData.yse;
+
 % Fast
 errorbar(FastData.xc, FastData.ym, FastData.yse, ...
     'o-', ...

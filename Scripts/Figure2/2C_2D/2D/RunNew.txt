@@ -1,0 +1,4 @@
+See Fig 2C to generate new data. If using PreRun_Data, be sure to point
+at Fig 2C PreRun_Data folder for this figure's data by rewriting the 
+definition of S1, S2, F1, and F2 in Run_Figure_S3B.m
+

@@ -5,3 +5,4 @@ threshold=0.96;
 
 % Compute the relative strengths and neuron indices
 [NormM, SortM, neuron_indices] = compute_effective_tuning(input_neurons, weight_matrix, n_pos, threshold);
+

@@ -3,7 +3,7 @@ addpath('./Code');
 
 %% Choose slow or fast membrane time constant results
 
-TmChoice = 'Fast'; % Slow or Fast Time Constant
+TmChoice = 'Slow'; % Slow or Fast Time Constant
 
 %% 1: Plurality | 2: Template | 3: L1 | 4: L2 | 5: Linear
 
@@ -17,8 +17,8 @@ Sparsity = 0;
 
 if strcmp(TmChoice,'Slow')
 
-    S1 = load('/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Internal/Supplementary/S03/S3_A/Data/resultsSlow1.mat');
-    S2 = load('/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Internal/Supplementary/S03/S3_A/Data/resultsSlow2.mat');
+    S1 = load('/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Data/Figure2/2C_2D/2C/PreRun_Data/resultsSlow1.mat');
+    S2 = load('/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Data/Figure2/2C_2D/2C/PreRun_Data/resultsSlow2.mat');
 
     results_sparse = S1.results;
     results_dense  = S2.results;
@@ -31,8 +31,8 @@ if strcmp(TmChoice,'Slow')
 
 elseif strcmp(TmChoice,'Fast')
 
-    F1 = load('/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Internal/Supplementary/S03/S3_A/Data/resultsFast1.mat');
-    F2 = load('/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Internal/Supplementary/S03/S3_A/Data/resultsFast2.mat');
+    F1 = load('/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Data/Figure2/2C_2D/2C/PreRun_Data/resultsFast1.mat');
+    F2 = load('/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Data/Figure2/2C_2D/2C/PreRun_Data/resultsFast2.mat');
 
     results_dense  = F1.results;   % 0 to 0.3, step 0.015
     results_sparse = F2.results;   % 0 to 0.5, step 0.025
@@ -115,3 +115,6 @@ if Sparsity == 1
 end
 
 M = horzcat(SaveMean{:});
+
+SaveMeanM = cell2mat(SaveMean');
+SaveSTDM = cell2mat(SaveError');

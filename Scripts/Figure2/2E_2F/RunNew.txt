@@ -1,3 +1,6 @@
+To Generate PreRun Analyses, go to Fig2E_2F subfolder and run: 
+Main_Fig2E_2F.m
+
 To Run generate new data, run EIRandom_Main_Fast.m or EIRandom_Main_Slow.m
 
 Save two files for each simulation:

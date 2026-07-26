@@ -81,9 +81,7 @@ sem_high_vm = std(aligned_high_vm, 0, 1, 'omitnan') ./ ...
 figure('Name','Average aligned Vm tuning curves');
 
 MLow=mean_low_vm';
-MHigh=mean_high_vm';
-SLow=sem_low_vm;
-SHigh=sem_high_vm;
+MHigh=mean_low_vm';
 
 fill([x fliplr(x)], ...
      [mean_low_vm + sem_low_vm, fliplr(mean_low_vm - sem_low_vm)], ...

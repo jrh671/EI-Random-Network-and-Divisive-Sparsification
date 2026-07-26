@@ -323,7 +323,7 @@ Run_EffectiveTuning
 figure;imagesc(results(neuron_indices,:), [ 0 1])
 
 theta = 0.15;          % example threshold
-E = linspace(0,1,1000);
+E = linspace(0,0.3,1000);
 
 K = E .* (E - theta);
 

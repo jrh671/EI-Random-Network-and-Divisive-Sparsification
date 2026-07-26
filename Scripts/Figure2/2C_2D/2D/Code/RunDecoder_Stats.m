@@ -79,8 +79,10 @@ hErrorbar(I) = errorbar(conditions, means, std_errors, ...
     'HandleVisibility', 'off');
 
 SaveMean{I,1} = means;
+SaveError{I,1} = std_errors;
 
 xlabel('Inhibitory Strength');
 ylabel('Decoding Error');
 title('Predicted vs Actual Position MSE');
 ylim([0,100]);
+

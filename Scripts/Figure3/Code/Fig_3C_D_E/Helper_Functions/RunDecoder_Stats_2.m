@@ -73,6 +73,9 @@ if ShowSparsity == 1
 
 else
     % figure;
+
+    SparsityValues{Overlap}=Sparsity(Length)';
+
     hold on;
     errorbar(Sparsity(Length), means(Length), std_errors(Length), 'o-', ...
         'Color', Colors(Overlap), 'HandleVisibility', 'off');
