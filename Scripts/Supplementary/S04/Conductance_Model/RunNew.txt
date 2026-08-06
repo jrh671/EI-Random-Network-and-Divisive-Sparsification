@@ -1,0 +1,3 @@
+Contact author for data to run presimulated activity. File size too large to update to database (12 Gb)
+
+To reproduce activity run EIRandom_Main_Fast.m and then run NormalizationAnalysis.m after setting PreRun_Data=0;
