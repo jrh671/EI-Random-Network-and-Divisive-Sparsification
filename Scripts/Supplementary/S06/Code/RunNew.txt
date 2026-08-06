@@ -1,0 +1,10 @@
+These codes use simulation results from figure 2AB. 
+
+Make sure to point to the correct figure 2 data folder when using "Fig_Plot.m"
+
+'/Your/Directory/Random_EIPlaceNet_Data/Figure2/2A_2B/Code/PreRun_Data/Results.mat'
+
+Furthermore, be sure to include the correct directory in "Additional_Simulations.m" from Figure 2.
+
+'/Your/Directory/Final_Manuscript/Random_EIPlaceNet_Data/Figure2/2A_2B/Code/Additional_Simulations/'
+
