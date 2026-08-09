@@ -4,7 +4,7 @@ Codebase for findings from "Effective computations for hippocampal place cell ph
 
 1) To run PreSimulated data and generate figures, the relevant data must be saved in the correct subfolder.\
 
-Link to Data: (enter link here)\
+Link to Data: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/YX9KUH
 
 The Data folder contains the folder structure where the data should be saved, for example:\
 
