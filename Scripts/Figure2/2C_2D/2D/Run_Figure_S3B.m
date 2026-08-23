@@ -5,10 +5,10 @@ addpath('./Code');
 
 TmChoice = 'Slow'; % Slow or Fast Time Constant
 
-%% 1: Plurality | 2: Template | 3: L1 | 4: L2 | 5: Linear
+%% 1: Assembly Tagging | 2: Template | 3: L1 | 4: L2 | 5: Linear
 
 SaveMean = cell(8,1);
-Labels = {'Plurality','Template','L1','L2','Linear'};
+Labels = {'Assembly Tagging','Template','L1','L2','Linear'};
 Instance = 1;
 Lam = linspace(0,1,10);
 cmap = jet(length(Lam));

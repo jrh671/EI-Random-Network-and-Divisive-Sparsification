@@ -3,14 +3,14 @@ addpath('./Code');
 
 %% Choose Slow Or Fast Time Constant Results
 
-TmChoice='Fast'; %Fast or Slow
+TmChoice='Slow'; %Fast or Slow
 
 %% Colors PreRun
 % Colors = ['r','b','k','g','c']; IDs = [Assembly Tagging, Template Matchiing, Lasso, Ridge, Unregularized Linear]
 
-%% Labels 1: Plurality | 2: Template | 3: L1| 4: L2| 5: Linear 
+%% Labels 1: Assembly Tagging | 2: Template | 3: L1| 4: L2| 5: Linear 
 
-Labels = {'Plurality','Template','L1','L2','Linear'};
+Labels = {'Assembly Tagging','Template','L1','L2','Linear'};
 figure
 SaveMean=cell(8,1);
 
@@ -18,7 +18,7 @@ for Decoder = 1:5 %Out of 5
 
 if strcmp(TmChoice,'Slow')
 
-    % Sparse/full range: 0 to 0.3, 21 points
+    % Sparse/full range: 0 to 0.3
     S1 = load('/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Data/Figure2/2C_2D/2C/PreRun_Data/resultsSlow1.mat');
 
 
@@ -39,7 +39,6 @@ if strcmp(TmChoice,'Slow')
 
     combined_conditions = [conditions_dense(keep_dense), conditions_sparse(keep_sparse)];
 
-    % Each condition has 10 samples
     nSamples = 10;
 
     combined_results = {};
@@ -68,10 +67,10 @@ if strcmp(TmChoice,'Slow')
 else
 
 
-    % Fast sparse range: 0 to 0.5, step 0.025
+    % Sparse range: 0 to 0.5, step 0.025
     F_sparse = load('/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Data/Figure2/2C_2D/2C/PreRun_Data/resultsFast1.mat');
     
-    % Fast dense range: 0 to 0.3, step 0.015
+    % Dense range: 0 to 0.3, step 0.015
     F_dense = load('/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Data/Figure2/2C_2D/2C/PreRun_Data/resultsFast2.mat');
 
     results_dense  = F_dense.results;
@@ -87,7 +86,7 @@ else
     % Keep dense through 0.3
     keep_dense = conditions_dense <= 0.3 + eps;
 
-    % Keep sparse only AFTER 0.3, no duplicate 0.3
+    % Avoid duplication 0.3
     keep_sparse = conditions_sparse > 0.3 + eps;
 
     combined_conditions = [conditions_dense(keep_dense), conditions_sparse(keep_sparse)];
@@ -121,4 +120,3 @@ Instance=1;
 RunDecoder_Stats;
 end
 
-% legend(hErrorbar, Labels); % Add legend after all plots are created

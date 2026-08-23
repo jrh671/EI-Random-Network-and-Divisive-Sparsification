@@ -23,6 +23,7 @@ parpool(32);
 
 parfor idx = 1:(NumIterations*NumRepetitions)
 % for idx = 10*21
+
     % Calculate P and N based on idxd
     sample = mod(idx-1, 10) + 1;
     Ohm = ceil(idx / 10);
@@ -218,20 +219,16 @@ results{idx}= Rates(:,31:end);
 end
 
 
-% Now you can save the results outside the parfor loop
     % Construct a unique filename for each iteration
     filename = sprintf('/mnt/home/jhurtado/ceph/resultsSlow.mat');
+
     % Save the results
     save(filename, 'results');
 
-        % Construct a unique filename for each iteration
     filename2 = '/mnt/home/jhurtado/ceph/W_InputESlow.mat';
-    % Save the results
     save(filename2, 'W_inputECell');
 
-    % Construct a unique filename for each iteration
     filename3 = '/mnt/home/jhurtado/ceph/PF_CellSlow.mat';
-    % Save the results
     save(filename3, 'pf_cellC');
 
 % Close the parallel pool

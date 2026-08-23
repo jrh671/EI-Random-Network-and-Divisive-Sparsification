@@ -34,9 +34,7 @@ for L = 1:nSamples
         % average sparsity across all time bins
         sparsity_values(N,L) = mean(sparsity_t, 'omitnan');
 
-        % If Spikes is time x neurons instead, use:
-        % sparsity_t = mean(Spikes == 0, 2);
-        % sparsity_values(N,L) = mean(sparsity_t, 'omitnan');
+
 
     end
 end

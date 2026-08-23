@@ -79,7 +79,7 @@ initial_weight_max_II = 0.05/ prob_I_I_connectivity;
 W_upper_limit = 0.5;                        % maximum weight we allow the E to I weights to take
 alpha_P = 0;                             % pink noise strength
 pf_rate = 8;                                % input neuron rate (in Hz) at center of pf
-pf_width = 10;                              % controls the Gaussian pf width (note it's actually the inverse) 10
+pf_width_ = .3162;                              % Gaussian pf width
 corr_window_size = 0.25;                    % size of window used for smoothing activity for correlation analysis
 
 %% Initiliazing the input neurons 

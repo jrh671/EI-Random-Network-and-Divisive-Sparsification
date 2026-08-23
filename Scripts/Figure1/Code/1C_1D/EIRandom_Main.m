@@ -3,16 +3,16 @@ addpath('./EI_Functions');
 addpath('./Helper_Functions');
 
 %% Set Loops
-Data = cell(1, 3); % 1 row, 3 columns (adjust dimensions as needed)
+Data = cell(1, 3); % 1 set of 3 simulations
 
 for Instance = 1
 
 
-% AcrossInhibition == 1
-% AcrossInputNoise == 2
-% AcrossOutputNoise == 3
+% Across(Inhibition) == 1
+% Across(InputNoise) == 2
+% Across(OutputNoise) == 3
 
-Across = Instance; % Select Loop (Across inhibition or noise)
+Across = Instance; % Select Loop (Across inhibition for Figure 1. Across noise for Figure S3)
 
 %% Begin Loop
 Sparsity=zeros(21,1);
@@ -76,18 +76,14 @@ for Option = 1:10
         Sparsity(Iteration,Option) = 1-mean(nonzero_proportion);
 
         end
-        
-        Run_Decoder1Fi; %In Helper_Functions Folder
-
+     
 
 
 
 end
 end
 
-Data{Instance} = data;
-
-EI_FullAnalysis_Results; %In EI_Functions Folder
+EI_FullAnalysis_Results; 
 
 end
 

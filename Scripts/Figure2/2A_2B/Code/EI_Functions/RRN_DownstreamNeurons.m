@@ -2,7 +2,7 @@ function downstream_neuron_outputs = RRN_DownstreamNeurons(spikeMat,TopNeurons)
 
 neuron_indices = TopNeurons;
 
-% Define a percentage threshold for co-activity (e.g., 90% --> 0.90)
+% Define a proportion threshold for co-activity 
 percentage_threshold = .7;
 
 % Define a firing rate threshold (e.g., 0.1, meaning neuron should fire at least 10% of the time)

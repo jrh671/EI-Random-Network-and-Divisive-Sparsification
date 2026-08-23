@@ -1,12 +1,9 @@
 function [DE, decoded_positions, neu_votes] = template_matching_decoder(Spikes, integer_pos, excluded_p, time_bin_length)
 
-    % Number of neurons
     num_neurons = size(Spikes, 1);
 
-    % Number of time bins
     num_bins = size(Spikes, 2);
 
-    % Number of positions
     num_positions = max(integer_pos);
 
     % Separate the Spikes and integer_pos into two halves
@@ -19,10 +16,8 @@ function [DE, decoded_positions, neu_votes] = template_matching_decoder(Spikes, 
     % Calculate the total spike count for each neuron in the first half
     total_spikes = sum(Spikes_first_half, 2);
 
-    % Find the firing rate threshold corresponding to the p-th percentile in the first half
     threshold = prctile(total_spikes, excluded_p);
 
-    % Calculate average firing rate vectors for each position using the first half
     avg_fr_per_position = zeros(num_neurons, num_positions);
     for pos = 1:num_positions
         pos_indices = (integer_pos_first_half == pos);
@@ -31,7 +26,6 @@ function [DE, decoded_positions, neu_votes] = template_matching_decoder(Spikes, 
         end
     end
 
-    % Initialize the decoded position vector
     decoded_positions = zeros(1, length(Spikes_second_half(1,:)));
 
     % Go through each time bin in the second half
@@ -46,16 +40,14 @@ function [DE, decoded_positions, neu_votes] = template_matching_decoder(Spikes, 
         [~, decoded_positions(i)] = max(correlations);
     end
 
-    % Calculate circular distance error
     circular_distance = @(x, y) min(abs(x - y), num_positions - abs(x - y));
-
-    % Assuming 'decoded_positions' and 'integer_pos_second_half' are vectors of the same length
+    
     decoding_error = 0;
     for i = 1:length(decoded_positions)
         error = circular_distance(decoded_positions(i), integer_pos_second_half(i));
         decoding_error = decoding_error + error^2;
     end
-
+    
     % Mean squared circular error
     DE = decoding_error / length(decoded_positions);
 

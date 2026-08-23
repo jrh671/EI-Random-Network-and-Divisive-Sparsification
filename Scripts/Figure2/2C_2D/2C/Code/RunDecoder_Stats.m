@@ -26,6 +26,7 @@ for P = 1:n_pos*n_laps
 end
 
 Length = 1:nConditions;
+lambda=0.1;
 
 for L = 1:nSamples
 
@@ -35,7 +36,7 @@ for L = 1:nSamples
 
         Spikes = X{N,L};
 
-        % 1: Plurality | 2: Template | 3: L1 | 4: L2 | 5: Linear
+        % 1: Assembly Tagging | 2: Template | 3: L1 | 4: L2 | 5: Linear
         if Decoder == 1
             [decoding_error(N,L), neu_votes, decoded_pos] = ...
                 plurality_voting_decoder(Spikes, integer_pos, excluded_p);
@@ -46,11 +47,11 @@ for L = 1:nSamples
 
         elseif Decoder == 3
             [decoding_error(N,L), sparsity, prediction, TestPos] = ...
-                linear_decoder_with_l1(Spikes, integer_pos, .1);
+                linear_decoder_with_l1(Spikes, integer_pos, lambda);
 
         elseif Decoder == 4
             [decoding_error(N,L), sparsity, prediction, TestPos] = ...
-                linear_decoder_with_l2(Spikes, integer_pos, .1);
+                linear_decoder_with_l2(Spikes, integer_pos, lambda);
 
         elseif Decoder == 5
             decoding_error(N,L) = linear_decoder(Spikes, integer_pos);

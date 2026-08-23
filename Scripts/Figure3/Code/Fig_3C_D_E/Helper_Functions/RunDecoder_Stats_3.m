@@ -1,6 +1,5 @@
-% Optional normalization
-if NormThresh == 1
-    X = X_NormThresh;
+if DivSparseOn == 1
+    X = X_DivSparse;
 end
 
 excluded_p       = 0;
@@ -14,9 +13,9 @@ for L = 1:N_samples
     for N = Length
         Spikes = X{N, L}(:, 1:end);
         switch Decoder
-            case 1  % Plurality
+            case 1  % Assembly_Tagging
                 [decoding_error(N, L), neu_votes, decoded_pos] = ...
-                    plurality_voting_decoder(Spikes, Positions, excluded_p);
+                    assembly_tagging_decoder(Spikes, Positions, excluded_p);
             case 2  % Template
                 [decoding_error(N, L), decoded_positions, neu_votes] = ...
                     template_matching_decoder(Spikes, Positions, excluded_p, time_bin_length);
@@ -50,14 +49,14 @@ end
 Colors = ['b','r','k','g','c'];
 
 if ShowSparsity == 1
-    if NormThresh == 1
+    if DivSparseOn == 1
         xVals = thresholds(Length);
     else
         xVals = conditions(Length);
     end
 
     figure;
-    if NormThresh == 1
+    if DivSparseOn == 1
         xSpars = thresholds(Length);
     else
         xSpars = conditions(Length);

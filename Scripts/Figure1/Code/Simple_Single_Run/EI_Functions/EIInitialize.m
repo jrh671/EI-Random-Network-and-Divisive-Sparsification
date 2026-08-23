@@ -40,7 +40,7 @@ VrI = 0;
         dt=mean_dt;
 
         pf_rate = 12; % Input neuron rate (in Hz) at center of pf
-        pf_width = .3162; % Controls Gaussian pf width pf_width = (1/Sigma^2)
+        pf_width_ = .3162; % Controls Gaussian pf width pf_width = (1/Sigma^2)
 
 else
 

@@ -8,9 +8,9 @@ TmChoice='Fast'; %Fast or Slow
 %% Colors PreRun
 % Colors = ['r','b','k','g','c']; IDs = [Assembly Tagging, Template Matchiing, Lasso, Ridge, Unregularized Linear]
 
-%% Labels 1: Plurality | 2: Template | 3: L1| 4: L2| 5: Linear 
+%% Labels 1: Assembly Tagging | 2: Template | 3: L1| 4: L2| 5: Linear 
 
-Labels = {'Plurality','Template','L1','L2','Linear'};
+Labels = {'Assembly Tagging','Template','L1','L2','Linear'};
 SaveMean=cell(8,1);
 
 
@@ -29,10 +29,9 @@ if strcmp(TmChoice,'Slow')
     conditions_sparse = linspace(0,0.3,21);
     conditions_dense  = linspace(0,0.1,21);
 
-    % Keep all dense points from 0 to 0.1
     keep_dense = conditions_dense <= 0.1;
 
-    % Keep sparse points after 0.1 only, avoiding duplicate 0.1
+    % Keep sparse points after 0.1, avoiding duplicate 0.1
     keep_sparse = conditions_sparse > 0.1;
 
     combined_conditions = [conditions_dense(keep_dense), conditions_sparse(keep_sparse)];
@@ -85,7 +84,7 @@ else
     % Keep dense through 0.3
     keep_dense = conditions_dense <= 0.3 + eps;
 
-    % Keep sparse only AFTER 0.3, no duplicate 0.3
+    % Avoid Duplicating
     keep_sparse = conditions_sparse > 0.3 + eps;
 
     combined_conditions = [conditions_dense(keep_dense), conditions_sparse(keep_sparse)];

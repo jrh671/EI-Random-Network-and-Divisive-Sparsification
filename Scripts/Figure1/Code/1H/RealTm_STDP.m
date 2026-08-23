@@ -1,7 +1,7 @@
 addpath('./Helper_Functions');
 addpath('./SavedFiles');
 
-%% Adjust Save Directory Below (Lines 280-308 and Lines 493-517)
+%% Adjust Save Directory Below (Lines 305+)
 
 rng(0)
 
@@ -23,11 +23,7 @@ n_pos = 30;
 
 MaxWeight=0.5;
 
-%% Adjusting Input, IE and EI resistance to current
-% UnitAdjInput = .00015; 
-% UnitAdjInhibEI = .075; 
-% UnitAdjInhibIE = .075/20;
- 
+%% Adjusting Input gain
 UnitAdjInput = .00015*10; 
 UnitAdjInhibEI = .015*15; 
 UnitAdjInhibIE = .015/10;
@@ -87,23 +83,12 @@ eta=5;
 %% Initiliazing the input neurons 
 
 %% Recurrent Weights %%
-% Note: W_inputE is not plastic
 W_inputE = rand(n_input, n_excit) * initial_weight_max_input;
 
 W_EE = zeros(n_excit, n_excit); 
 W_II = zeros(n_inhib, n_inhib); 
 W_EI = rand(n_excit, n_inhib); 
 W_IE = rand(n_inhib, n_excit);
-
-% W_EE(W_EE > prob_E_recurrent_connectivity) = 0;
-% W_EE(diag(ones(1,n_excit)) == 1) = 0;       % no neurons can connect recurrently to themselves
-% W_EE=W_EE/max(W_EE,[],'all');
-% W_EE = W_EE * initial_weight_max_EE;
-
-% W_II(W_II > prob_I_I_connectivity) = 0;
-% W_II(diag(ones(1,n_inhib)) == 1) = 0;       % no neurons can connect recurrently to themselves
-% W_II=W_II/max(W_II,[],'all');
-% W_II = W_II * initial_weight_max_II;
 
 
 W_EI(W_EI > prob_E_I_connectivity) = 0;
@@ -119,7 +104,7 @@ W_IE = W_IE * InitialWeight;
 %% Running the network 
 % Determining the speed of the animal running through the track
 mean_dt = dt; sigma_dt = 0;              % time scale of updating activity
-mean_v = (1); %%CHANGE DIRECTION 
+mean_v = (1); 
 sigma_v = 0;                    % mean and std speed of animal
 
 dt_vec = normrnd(mean_dt, sigma_dt, 1, ceil(n_steps/mean_dt));
@@ -127,7 +112,7 @@ dt_vec(dt_vec < 0 ) = 0;
 total_time_vec = cumsum(dt_vec);
 v_vec0 = normrnd(mean_v, sigma_v, 1, ceil(n_steps/mean_dt)); 
 v_vec = [0, v_vec0];
-v_vec(v_vec < 0) = 0; %% CHANGE INEQUALITY
+v_vec(v_vec < 0) = 0; 
 
 % Determining the path of the animal running through the track
 positions = 0.5 * (v_vec(1:end-1) + v_vec(2:end)) .* dt_vec; % generating the positions at each time step from dt and the difference in velocities (trying to make it smooth)
@@ -173,21 +158,11 @@ window_count = 0;
 
 
 
-pf_width = 1/pf_width_^2;
+pf_width = 1/pf_width_^2; % Gaussian width
 
 %% Program Stimulation
 % Running the network on the linear track 
 for tt = 1:length(total_time_vec)
-
-    % if mod(tt,3/mean_dt)==1
-    % 
-    %     ceil(tt/(3/mean_dt))
-    %     'EI'
-    %     mean(W_EI,'all')
-    %     'IE'
-    %     mean(W_IE,'all')
-    % 
-    % end
 
 
 
@@ -219,7 +194,7 @@ for tt = 1:length(total_time_vec)
   
   
 
-% Updating excitatory cumulative input 
+   % Updating excitatory cumulative input 
     excit_cum_input = excit_cum_input + ((1)/C)*input_spikes * W_inputE*UnitAdjInput*((dt)) + ...
        (1/C)*excit_spikes * W_EE*dt - ((gL/C))*(excit_cum_input-VLeakE)*dt - (1/C)*inhib_spikes * W_IE*UnitAdjInhibIE*(dt) + alpha_P * pinknoise(n_excit);     
     excit_cum_input((total_time_vec(tt) - excit_most_recent_fire_times_vec) < excit_refract_length) = VrE; % setting voltage equal to 0 for any neurons still in their absolute refractory period
@@ -270,36 +245,24 @@ for tt = 1:length(total_time_vec)
         % EI and IE updated with BCM only once per window
         d_W_EI = +(bcm_E' * I_avg);   % N_E x N_I
         d_W_IE = +(bcm_I' * E_avg);   % N_I x N_E
-    
-        % EE and II unchanged
-        d_W_EE = +(E_avg' * E_avg);   % N_E x N_E
-        d_W_II = -(I_avg' * I_avg);   % N_I x N_I
-    
-        % Optional: remove self-plasticity on recurrent populations
-        d_W_EE(1:size(d_W_EE,1)+1:end) = 0;
-        d_W_II(1:size(d_W_II,1)+1:end) = 0;
+ 
     
         % Clip update magnitude
         d_W_EI(d_W_EI > 1) = 1; d_W_EI(d_W_EI < -1) = -1;
         d_W_IE(d_W_IE > 1) = 1; d_W_IE(d_W_IE < -1) = -1;
-        d_W_EE(d_W_EE > 1) = 1; d_W_EE(d_W_EE < -1) = -1;
-        d_W_II(d_W_II > 1) = 1; d_W_II(d_W_II < -1) = -1;
+
     
         % Apply updates once per K-step window
         W_EI = W_EI + EI_plast * eta * d_W_EI;
         W_IE = W_IE + IE_plast * eta * d_W_IE;
     
         % Enforcing weight boundaries
-        W_EE(W_EE < 0) = 0;
         W_EI(W_EI < 0) = 0;
         W_IE(W_IE < 0) = 0;
-        W_II(W_II < 0) = 0;
     
         W_EI(W_EI > W_upper_limit) = W_upper_limit;
         W_IE(W_IE > W_upper_limit) = W_upper_limit;
-        W_EE(W_EE > W_upper_limit) = W_upper_limit;
-        W_II(W_II > W_upper_limit) = W_upper_limit;
-    
+
         % Reset accumulators
         E_accum = zeros(size(excit_spikes));
         I_accum = zeros(size(inhib_spikes));
@@ -322,7 +285,7 @@ n_laps=5;
 Run_EffectiveTuning
 figure;imagesc(results(neuron_indices,:), [ 0 1])
 
-theta = 0.15;          % example threshold
+theta = 0.15;          % example threshold for figure 1H
 E = linspace(0,0.3,1000);
 
 K = E .* (E - theta);

@@ -11,7 +11,7 @@ figure; imagesc(FiringRate(neuron_indices,n_pos+1:end),[0 1])
 % Assembly Voting Decoder
 IntegerPos=SlidingAverage_s_mean(integer_pos,mean_dt);
 time_bin_length=1;excluded_p=0;
-[DE_PVo, neu_votesPV, D_Pos_PVo] = plurality_voting_decoder(FiringRate(:,n_pos+1:end), IntegerPos, excluded_p, time_bin_length);
+[DE_PVo, neu_votesPV, D_Pos_PVo] = assembly_tagging_decoder(FiringRate(:,n_pos+1:end), IntegerPos, excluded_p, time_bin_length);
 
 figure;
 plot(IntegerPos(length(IntegerPos)-length(D_Pos_PVo)+1:end));hold on; plot(D_Pos_PVo, 'bo')

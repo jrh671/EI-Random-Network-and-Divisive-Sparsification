@@ -22,7 +22,7 @@ excit_refract_length = 0.02;                % excit refractory length
 inhib_refract_length = 0.02;                % inhibitory refractory length
 alpha_P = 0;                             % pink noise strength
 pf_rate = 8;                                % input neuron rate (in Hz) at center of pf
-pf_width = 10;                              % controls the Gaussian pf width (note it's actually the inverse) 10
+pf_width_ = .3162;                              % Gaussian pf width 
 
 % Determining the speed of the animal running through the track
 mean_dt = 0.005; sigma_dt = 0;              % time scale of updating activity
@@ -76,6 +76,7 @@ direction = 1; %Initialize Direction
 
 %% Begin Recall Simulation
  
+pf_width = 1/pf_width_.^2;
 for tt = 1:ceil(TotalTimeBins)
  
   %% Sliding windows to check for downstream activations by tagged neurons
@@ -102,15 +103,6 @@ for tt = 1:ceil(TotalTimeBins)
             freeze_on_this_lap = true;
         end
        
-        % % Change direction if Goal reactivation occurs
-        % if direction_change == 1 && direction_change_on_this_lap == false
-        %     'Reversal';
-        %     direction = -direction;  % flip direction
-        %     direction_change_on_this_lap = true;
-        %     DirectionChangeNow = DirectionChangeNow+1;
-        %     DirectionChangeRecord(tt) = DirectionChangeNow;
-        % 
-        % end
 
 
         % Change direction if Goal reactivation occurs and meets the 5-second condition
@@ -126,7 +118,7 @@ for tt = 1:ceil(TotalTimeBins)
                 % Update the last reversal time
                 last_reversal_time = tt;
             else
-                'Reversal blocked due to time condition'; % Optional debug message
+                'Reversal blocked due to time condition'; 
             end
         end
 
@@ -233,7 +225,7 @@ for tt = 1:ceil(TotalTimeBins)
     excit_spikes = excit_spikes_2;
     
     % Record the spiking activity
-    spiking_activity(:,tt) = spike_mat_excit(:,tt); % Update this with your own code
+    spiking_activity(:,tt) = spike_mat_excit(:,tt); 
     
     % Update the last 3 seconds activity
     last_three_seconds_activity = [last_three_seconds_activity(:,2:end), spiking_activity(:,tt)];

@@ -1,7 +1,7 @@
 addpath('./Helper_Functions');
 addpath('./SavedFiles_Fast');
 
-%% Adjust Save Directory Below (Lines 280-308 and Lines 493-517)
+%% Adjust Save Directory Below (Lines 270+))
 
 rng(0)
 
@@ -44,6 +44,7 @@ initial_weight_max_EE = 0.05 / prob_E_recurrent_connectivity; % initial weight m
 initial_weight_max_EI = 0.05 / prob_I_E_connectivity;  % initial weight maximum for E to I
 initial_weight_max_IE = 0.05 / prob_E_I_connectivity; % initial weight maximum for I to E
 initial_weight_max_II = 0.05 / prob_I_I_connectivity; % initial weight maximum for I to E
+Save=0;
 
 I_F_threshE = -55;                           % integrate and fire threshold 
 I_F_threshI = -55;                           % integrate and fire threshold 
@@ -92,30 +93,15 @@ W_II = 0;%rand(n_inhib, n_inhib);
 W_EI = rand(n_excit, n_inhib); 
 W_IE = rand(n_inhib, n_excit);
 
-% W_EE(W_EE > prob_E_recurrent_connectivity) = 0;
-% W_EE(diag(ones(1,n_excit)) == 1) = 0;       % no neurons can connect recurrently to themselves
-% W_EE=W_EE/max(W_EE,[],'all');
-% W_EE = W_EE * initial_weight_max_EE;
-% 
-% W_II(W_II > prob_I_I_connectivity) = 0;
-% W_II(diag(ones(1,n_inhib)) == 1) = 0;       % no neurons can connect recurrently to themselves
-% W_II=W_II/max(W_II,[],'all');
-% W_II = W_II * initial_weight_max_II;
-
-
-% W_EI(W_EI > prob_E_I_connectivity) = 0;
-% W_EI=W_EI/max(W_EI,[],'all');
 W_EI = W_EI * InitialWeight; 
 
-% W_IE(W_IE > prob_I_E_connectivity) = 0;
-% W_IE=W_IE/max(W_IE,[],'all');
 W_IE = W_IE * InitialWeight;
 
 
 %% Running the network 
 % Determining the speed of the animal running through the track
 mean_dt = dt; sigma_dt = 0;              % time scale of updating activity
-mean_v = (1); %%CHANGE DIRECTION 
+mean_v = 1; 
 sigma_v = 0;                    % mean and std speed of animal
 
 dt_vec = normrnd(mean_dt, sigma_dt, 1, ceil(n_steps/mean_dt));
@@ -123,7 +109,7 @@ dt_vec(dt_vec < 0 ) = 0;
 total_time_vec = cumsum(dt_vec);
 v_vec0 = normrnd(mean_v, sigma_v, 1, ceil(n_steps/mean_dt)); 
 v_vec = [0, v_vec0];
-v_vec(v_vec < 0) = 0; %% CHANGE INEQUALITY
+v_vec(v_vec < 0) = 0; 
 
 % Determining the path of the animal running through the track
 positions = 0.5 * (v_vec(1:end-1) + v_vec(2:end)) .* dt_vec; % generating the positions at each time step from dt and the difference in velocities (trying to make it smooth)
@@ -160,7 +146,7 @@ inhib_most_recent_fire_times_vec = zeros(1, n_inhib) - 100;
 
 
 
-pf_width = 1/pf_width_^2;
+pf_width = 1/pf_width_^2; %% Gaussian Width
 
 %% Program Stimulation
 % Running the network on the linear track 
@@ -242,26 +228,19 @@ for tt = 1:length(total_time_vec)
     d_W_EI(d_W_EI > 1) = 1; d_W_EI(d_W_EI < -1) = -1; % making the max change in weight be eta
     d_W_IE = (excit_spikes' * x_inhib)' + inhib_spikes' * x_excit - 0.0001 * ones(size(W_IE)); % shifting the curve by .1%
     d_W_IE(d_W_IE > 1) = 1; d_W_IE(d_W_IE < -1) = -1;
-    d_W_EE = x_excit' * excit_spikes - excit_spikes' * x_excit; 
-    d_W_EE(d_W_EE > 1) = 1; d_W_EE(d_W_EE < -1) = -1;
-    d_W_II = x_inhib' * inhib_spikes - inhib_spikes' * x_inhib; 
-    d_W_II(d_W_II > 1) = 1; d_W_II(d_W_II < -1) = -1;
+
      
 
     W_EI = W_EI + EI_plast * eta * d_W_EI;    
     W_IE = W_IE + IE_plast * eta * d_W_IE; 
-    W_EE = W_EE + EE_plast * eta * d_W_EE; 
-    W_II = W_II + II_plast * eta * d_W_II; 
+
 
     % Enforcing weight boundaries 
-    W_EE(W_EE < 0 ) = 0; 
     W_EI(W_EI < 0) = 0; 
     W_IE(W_IE < 0) = 0;
-    W_II(W_II < 0) = 0;
     W_EI(W_EI > W_upper_limit) = W_upper_limit; 
     W_IE(W_IE > W_upper_limit) = W_upper_limit; 
-    W_EE(W_EE > W_upper_limit) = W_upper_limit; 
-    W_II(W_II > W_upper_limit) = W_upper_limit; 
+
      
     Mean_EI(tt) = mean(W_EI,'all');
     Mean_IE(tt) = mean(W_IE,'all');
@@ -284,51 +263,52 @@ Run_EffectiveTuning;
 figure;imagesc(results(neuron_indices,:), [ 0 1])
 
  
-% Now you can save the results outside the parfor loop
+%% Save Data
+
+if Save==1
     % Construct a unique filename for each iteration
     filename = sprintf('./SavedFiles/resultsFastSTDP1.mat');
-    % Save the results
+
     save(filename, 'results');
 
-        % Construct a unique filename for each iteration
     filename2 = './SavedFiles/W_InputEFastSTDP1.mat';
-    % Save the results
     save(filename2, 'W_inputE');
 
     % Construct a unique filename for each iteration
     filename3 = './SavedFiles/PF_CellFastSTDP1.mat';
-    % Save the results
+
     save(filename3, 'pf_cell');
 
-        % Construct a unique filename for each iteration
+    
     filename4 = './SavedFiles/Mean_EIFastSTDP1.mat';
-    % Save the results
+
     save(filename4, 'Mean_EI');
 
-    % Construct a unique filename for each iteration
+
     filename5 = './SavedFiles/Mean_IEFastSTDP1.mat';
-    % Save the results
+
     save(filename5, 'Mean_IE');
 
-    % Construct a unique filename for each iteration
+
     filename6 = sprintf('./SavedFiles/InputsFastSTDP1.mat');
-    % Save the results
+
     save(filename6, 'InputRates');
 
-    % Construct a unique filename for each iteration
+
     filename7 = sprintf('./SavedFiles/Positions1.mat');
-    % Save the results
+
     save(filename7, 'Positions');
 
-    % Construct a unique filename for each iteration
+
     filename8 = sprintf('./SavedFiles/Indices1.mat');
-    % Save the results
+
     save(filename8, 'neuron_indices');
 
-        % Construct a unique filename for each iteration
+    
     filename9 = sprintf('./SavedFiles/VmE1.mat');
-    % Save the results
+
     save(filename9, 'VmE');
 
+end
 
 

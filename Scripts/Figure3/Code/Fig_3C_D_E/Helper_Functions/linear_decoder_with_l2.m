@@ -1,8 +1,6 @@
 function [mean_squared_circular_error, sparsity, decoded_positions, positions_test] = linear_decoder_with_l2(Spikes, integer_pos, lambda)
-    % Function to calculate circular distance
     circular_distance = @(x, y, num_positions) min(abs(x - y), num_positions - abs(x - y));
 
-    % Split data into training and testing sets
     num_samples = size(Spikes, 2);
     half_samples = floor(num_samples / 2);
 
@@ -15,8 +13,6 @@ function [mean_squared_circular_error, sparsity, decoded_positions, positions_te
     positions_test = integer_pos(half_samples+1:end);
 
     % Train Ridge regression model
-    % Ridge requires predictors (Spikes_train') with samples as rows and features as columns
-    % Lambda is the regularization parameter (L2 regularization strength)
     B = ridge(positions_train, Spikes_train', lambda, 0);
 
     % Ensure B has the same number of elements as the features

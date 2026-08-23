@@ -4,7 +4,7 @@ ms = (1e-3);
 cs = (1e-2);
 s = 1;
 % Parameters
-bin_duration = UpdatePeriod; % 5ms bins
+bin_duration = UpdatePeriod; 
 target_bin_duration = s; % ms Bins
 num_bins = round(target_bin_duration / bin_duration); % Number of bins in the target duration
 

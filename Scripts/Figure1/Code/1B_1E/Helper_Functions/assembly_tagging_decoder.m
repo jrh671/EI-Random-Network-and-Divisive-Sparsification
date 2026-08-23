@@ -1,4 +1,4 @@
-function [DE, neu_votes, decoded_positions] = plurality_voting_decoder(Spikes, integer_pos, excluded_p, time_bin_length)
+function [DE, neu_votes, decoded_positions] = assembly_tagging_decoder(Spikes, integer_pos, excluded_p, time_bin_length)
 
 
     num_neurons = size(Spikes, 1);

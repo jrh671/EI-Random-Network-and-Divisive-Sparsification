@@ -59,7 +59,7 @@ for Context = ContextGoal
         fprintf('Epoch %d\n', Epoch);
     
         % Parameters
-        N = 100;         % Number of neurons in CA3
+        N = 100;         % Number of neurons
         K = 300;         % Number of inputs
         P = 10;          % Number of positions per dimension (total positions = P x P)
         T = 1200;         % Number of time steps
@@ -76,8 +76,9 @@ for Context = ContextGoal
         end
         noise_std = 0.2; % Uniform Noise
         MemoryLimit=20;
+        
         % Chosen neurons for visualization 
-          Choose2NeuronsCA3=[1,2];% [6,10] and [8,53] . [6,10,15,18,19,38,66]
+          Choose2NeuronsCA3=[1,2];
 
         % Define special location and radius
         special_location = [7, 2];

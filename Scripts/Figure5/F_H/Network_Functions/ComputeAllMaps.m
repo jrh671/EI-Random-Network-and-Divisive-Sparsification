@@ -1,38 +1,33 @@
-% Initialize temporal rates array
 temporal_rates_CA3 = zeros(N, T);
 
 chosen_neurons_CA3ave = 1:1:100;   % should contain up to 100 neuron indices
 
-% If you want exactly the first 100 neurons from the list:
 if length(chosen_neurons_CA3ave) > 100
     chosen_neurons_CA3ave = chosen_neurons_CA3ave(1:100);
 end
 
-% Initialize arrays to store the cumulative activity at each location for chosen neurons
 cumulative_activity_map_CA3 = zeros(P, P, length(chosen_neurons_CA3ave));
 occupancy_map = zeros(P, P);
 
 for t = 1:T
     firing_rates_CA3 = firing_rate_snapshots_CA3{t};
 
-    % Get the current position in the trajectory
-    pos = round(trajectory(t, :)); % Round to nearest integer to use as indices
+    % Get the current position
+    pos = round(trajectory(t, :)); 
 
-    if all(pos > 0) && all(pos <= P) % Ensure the position is within bounds
+    if all(pos > 0) && all(pos <= P) 
         occupancy_map(pos(1), pos(2)) = occupancy_map(pos(1), pos(2)) + 1;
 
-        % Update the cumulative activity map and store temporal rates
+        % Update the cumulative activity map
         for i = 1:N
             rate_at_pos = firing_rates_CA3{i}(pos(1), pos(2));
 
-            % Update cumulative activity map if neuron is in chosen_neurons_CA3ave
             if ismember(i, chosen_neurons_CA3ave)
                 neuron_index = find(chosen_neurons_CA3ave == i);
                 cumulative_activity_map_CA3(pos(1), pos(2), neuron_index) = ...
                     cumulative_activity_map_CA3(pos(1), pos(2), neuron_index) + rate_at_pos;
             end
 
-            % Store the firing rate for the current time point
             temporal_rates_CA3(i, t) = rate_at_pos;
         end
     end
@@ -44,7 +39,6 @@ for n = 1:length(chosen_neurons_CA3ave)
     cumulative_activity_map_CA3(:, :, n) = cumulative_activity_map_CA3(:, :, n) ./ occupancy_map;
 end
 
-% Normalize the activity maps by the max value of each neuron
 for n = 1:length(chosen_neurons_CA3ave)
     max_val = max(cumulative_activity_map_CA3(:, :, n), [], 'all');
     if max_val > 0
@@ -56,8 +50,8 @@ end
 if Epoch == 2
     if PlotMaps == 1
 
-        nPerFigure = 10;   % 10 subplots per figure
-        nFiguresMax = 10;  % up to 10 figures
+        nPerFigure = 10;   
+        nFiguresMax = 10;  
         totalNeurons = length(chosen_neurons_CA3ave);
 
         neuronsToPlot = min(totalNeurons, nPerFigure * nFiguresMax);

@@ -1,3 +1,6 @@
+addpath("EI_Functions/")
+addpath("Helper_Functions/")
+
 load('/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Data/Figure1/Code/1F/PreRun_Data/resultsFast.mat')
 load('/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Data/Figure1/Code/1F/PreRun_Data/W_InputEFast.mat')
 load('/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Data/Figure1/Code/1F/PreRun_Data/PF_CellFast.mat')
@@ -6,6 +9,7 @@ load('/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Dat
 pf_cell=pf_cellC;
 W_inputE=W_inputECell{1};
 
+%% Generating positions with faster integration times
 n_pos=30;
 n_laps=5;
 mean_dt=.0005;
@@ -13,7 +17,6 @@ sigma_dt=0;
 mean_v=1;
 sigma_v=0;
 
-%% Generate time and velocity vectors
 n_steps = n_laps * n_pos;
 dt_vec = normrnd(mean_dt, sigma_dt, 1, ceil(n_steps/mean_dt));
 dt_vec(dt_vec < 0 ) = 0;
@@ -23,14 +26,15 @@ v_vec0 = normrnd(mean_v, sigma_v, 1, ceil(n_steps/mean_dt));
 v_vec(2:end) = v_vec0;
 v_vec(v_vec < 0) = 0;
 
-% Determining the path of the animal running through the track
-positions = 0.5 * (v_vec(1:end-1) + v_vec(2:end)) .* dt_vec; % generating the positions at each time step from dt and the difference in velocities (trying to make it smooth)
+% Determining the path of the animal
+positions = 0.5 * (v_vec(1:end-1) + v_vec(2:end)) .* dt_vec; % generating the positions at each time step from dt and the difference in velocities 
 positions = mod(cumsum(positions), n_pos);
 
 
-N_params = 21; % Assuming 21 thresholds
-N_samples = 10; % 10 samples per threshold
+N_params = 21; %Number of different thresholds
+N_samples = 10; %Random iterations for error bars
 
+%% Collect Activities
 X1 = cell(N_params, N_samples); % Preallocate cell array
 
 for i = 1:N_params
@@ -52,12 +56,9 @@ load('/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Dat
 pf_cell=pf_cellC;
 W_inputE=W_inputECell{1};
 
-n_pos=30;
-n_laps=5;
+%% Regenerating positions with slower integration times
 mean_dt=.005;
 sigma_dt=0;
-mean_v=1;
-sigma_v=0;
 
 %% Generate time and velocity vectors
 n_steps = n_laps * n_pos;
@@ -73,15 +74,12 @@ v_vec(v_vec < 0) = 0;
 positions = 0.5 * (v_vec(1:end-1) + v_vec(2:end)) .* dt_vec; % generating the positions at each time step from dt and the difference in velocities (trying to make it smooth)
 positions = mod(cumsum(positions), n_pos);
 
-
-N_params = 21; % Assuming 21 thresholds
-N_samples = 10; % 10 samples per threshold
-
-X2 = cell(N_params, N_samples); % Preallocate cell array
+%% Collect Activities
+X2 = cell(N_params, N_samples);
 
 for i = 1:N_params
     for j = 1:N_samples
-        X2{i, j} = results{(i-1)*N_samples + j}; % Assign each sample correctly
+        X2{i, j} = results{(i-1)*N_samples + j}; 
     end
 end
 

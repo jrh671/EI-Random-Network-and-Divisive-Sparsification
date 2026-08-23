@@ -1,4 +1,8 @@
+PreRun=0;
+
+if PreRun==1;
 load('/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Data/Figure1/Code/1C_1D/PreRun_Data/Data.mat')
+end
 
 Iteration=21;
 %% Compute Sparsity
@@ -37,8 +41,9 @@ grid on;
 end
 
 
-
+if PreRun==1;
 load('/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Data/Figure1/Code/1C_1D/PreRun_Data/Single_FR.mat')
+end
 
 for i = 5:4:21
 figure;

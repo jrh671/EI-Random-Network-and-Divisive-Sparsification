@@ -216,20 +216,16 @@ results{idx}= Rates(:,31:end);
 end
 
 
-% Now you can save the results outside the parfor loop
     % Construct a unique filename for each iteration
     filename = sprintf('/mnt/home/jhurtado/ceph/MATLAB_New/resultsFast.mat');
-    % Save the results
+
     save(filename, 'results');
 
-        % Construct a unique filename for each iteration
     filename2 = '/mnt/home/jhurtado/ceph/MATLAB_New/W_InputEFast.mat';
-    % Save the results
+    
     save(filename2, 'W_inputECell');
 
-    % Construct a unique filename for each iteration
     filename3 = '/mnt/home/jhurtado/ceph/MATLAB_New/PF_CellFast.mat';
-    % Save the results
     save(filename3, 'pf_cellC');
 
 % Close the parallel pool

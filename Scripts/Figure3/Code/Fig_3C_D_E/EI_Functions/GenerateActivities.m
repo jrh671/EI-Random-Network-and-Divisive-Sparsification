@@ -2,18 +2,16 @@ for thresh = 1:length(thresholds)
     thresh
     for samples=1:N_samples
         
-sigma = .8; % Standard deviation of the Gaussian
+sigma = .8; % Standard deviation of the mixture of Gaussians  
 Homogeneous = .05;
 Rates = 4;
-NormThresh = NormM;
-NormThresh(NormThresh < thresholds(thresh)) = 0;
+DivSparse = NormM;
+DivSparse(DivSparse < thresholds(thresh)) = 0;
 
-% Dimensions
-[NumNeurons, NumPositions] = size(NormThresh);
+[NumNeurons, NumPositions] = size(DivSparse);
 Pos = Positions;
 Time = length(Pos);
 
-% Preallocate Activity matrix
 Activity = zeros(NumNeurons, Time);
 
 
@@ -21,16 +19,15 @@ Activity = zeros(NumNeurons, Time);
 homogeneous_rates = rand(NumNeurons, 1) * Homogeneous; % Example: Random rates between 0 and 2
 
 % Generate activity based on NormThresh and IntegerPos
+
 for t = 1:Time
-    % Get the position index for the current time point
     posIdx = Pos(t);
 
-    % Initialize the mixture of Gaussians
     mixture_gaussians = zeros(NumNeurons, 1);
 
     for pos = 1:NumPositions
-        % Get the nonzero values for the current position
-        neuron_amplitudes = NormThresh(:, pos);
+
+        neuron_amplitudes = DivSparse(:, pos);
         nonzero_indices = neuron_amplitudes > 0;
 
         % Create Gaussian envelopes for nonzero values
@@ -41,12 +38,12 @@ for t = 1:Time
         end
     end
 
-    % Add inhomogeneous and non-uniform homogeneous Poisson activity
+    % Add inhomogeneous and homogeneous Poisson activity
     Activity(:, t) = Rates.*poissrnd(mixture_gaussians) + poissrnd(homogeneous_rates);
 
 end
 
 
-X_NormThresh{thresh,samples} = Activity;
+X_DivSparse{thresh,samples} = Activity;
     end
 end

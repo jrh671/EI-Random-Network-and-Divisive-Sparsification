@@ -1,4 +1,7 @@
 These codes use simulation results from figure 1F. 
+
+Run DivSparse_Comparisons for full analysis.
+
 First be sure to include the correct directory in "LoadPreRun.m"
 Making sure to point to the PreRun_Data folder of Figure 1F.
 

@@ -6,7 +6,7 @@ Plasticity=0;
 VisualizePlasticity=0;
 
 % Parameters
-N = 100;         % Number of neurons in CA3
+N = 100;         % Number of neurons
 K = 300;         % Number of inputs
 P = 20;          % Number of positions per dimension (total positions = P x P)
 T = 8000;         % Number of time steps
@@ -15,8 +15,8 @@ seed=1;  % Environment ID.
 noise_std=0;
 MemoryLimit=1000; 
 
-% For Other Seeds choose different Neurons Below:
-Choose2NeuronsCA3= [59,68];%Best 2 PFs: [12, 20, 33, 68, 90]
+% For Visualization
+Choose2NeuronsCA3= [59,68];
 
 % Define special location and radius
 special_location = [7, 2]; 
@@ -33,11 +33,15 @@ end
 if GenerateActivity==1
     'Begin Activity'
     RunGenerateActivity;
+    FiringRates=FiringRates1;
+    AllCells_RateMap;
+    RateMap1=RateMap;
+    Traj1=Trajectory1;
+    nonZeroIndices1=nonZeroIndices;
 end
 
 
 Visualize2DMaps;
-
 PlaceCellStats;
 
 
@@ -53,20 +57,15 @@ end
 if GenerateActivity==1
     'Begin Activity'
     RunGenerateActivity;
-    FiringRates=FiringRates1;
+    FiringRates=FiringRates2;
     AllCells_RateMap;
-    RateMap1=RateMap;
-    nonZeroIndices1=nonZeroIndices;
+    RateMap2=RateMap;
+    Traj2=Trajectory2;
+    nonZeroIndices2=nonZeroIndices;
 
 end
 
 % Visualization
 Visualize2DMaps;
-SheetNoPlast =cumulative_activity_map_CA3(:,:,1);
-Traj1=trajectory;
-FRAve1=cumulative_activity_map_CA3;
 TwoPFs=find(numPeaks==2);
-
-QuickRun2
-
 Overdispersion

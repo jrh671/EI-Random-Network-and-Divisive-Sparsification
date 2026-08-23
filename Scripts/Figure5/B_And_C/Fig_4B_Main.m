@@ -6,7 +6,7 @@ VisualizePlasticity=0;
 Plasticity=0;
 
 % Parameters
-N = 100;         % Number of neurons in CA3
+N = 100;         % Number of neurons 
 K = 300;         % Number of inputs
 P = 7;          % Number of positions per dimension (total positions = P x P)
 T = 5000;         % Number of time steps
@@ -14,7 +14,7 @@ noise_std=0;
 MemoryLimit=1000;
 
 % Chosen neurons for visualization 
-Choose2NeuronsCA3=[59,68]; % 2D Compatible Neurons: [7,16,93,99,97,100]]
+Choose2NeuronsCA3=[59,68]; 
 
 % Define special location and radius
 special_location = [7, 2];
@@ -40,7 +40,6 @@ end
 
 % Visualization
 Visualize2DMaps;
-% 
 PlaceCellStats;
 
 SmallPFs1=find(numPeaks>0);
