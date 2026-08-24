@@ -157,3 +157,4 @@ end
 MapStability;
 end
 
+ComputeAllMaps;

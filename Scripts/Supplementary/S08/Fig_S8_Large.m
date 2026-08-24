@@ -1,3 +1,5 @@
+clear
+
 addpath('./Network_Functions');
 
 GenerateTuning=1;
@@ -18,8 +20,7 @@ seed=1;  % Environment ID.
 noise_std=0;
 MemoryLimit=1000; 
 
-% For Other Seeds choose different Neurons Below:
-Choose2NeuronsCA3= [20,34];%[14,62];%
+Choose2NeuronsCA3= [20,34];
 
 % Define special location and radius
 special_location = [7, 2]; 

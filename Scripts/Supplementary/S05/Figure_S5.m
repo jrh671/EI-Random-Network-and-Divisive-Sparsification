@@ -238,10 +238,9 @@ Pairwise_Dist;
 
 %% ====================== LOCAL FUNCTION ======================
 function [FavPos, RateMaps] = local_compute_FavPos_with_optional_rates(X, P, window_size, step_size, RATES, figName, plot_windows)
-    % X: [N x T]; P positions/lap; RATES: 1 -> animate selected windows
-    % plot_windows: [] => plot all windows (original behavior)
 
-    [N, T] = size(X); %#ok<NASGU>
+
+    [N, T] = size(X); 
     assert(mod(T, P)==0, 'T must be a multiple of P.');
     L = T / P;
 

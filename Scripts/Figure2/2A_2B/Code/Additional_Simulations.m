@@ -7,7 +7,7 @@ addpath('Helper_Functions');
 
 PlotFigure = 1;
 
-% Specify the indices of the files you want to use (choose any 10)
+% Specify the indices of the simulations
 selectedIndices = randperm(10,10);  % Choose 10 Separate Simulations
 FigureToPlot = 10;
 

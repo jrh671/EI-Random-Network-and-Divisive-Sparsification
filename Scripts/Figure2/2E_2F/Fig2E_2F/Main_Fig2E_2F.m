@@ -8,6 +8,7 @@
 % Set COMBINE to false for one condition or true for Fast + Slow overlay.
 % ============================================================
 
+addpath("AnalysisFunctions")
 COMBINE = true;
 FAST = true;  % used only when COMBINE is false
 

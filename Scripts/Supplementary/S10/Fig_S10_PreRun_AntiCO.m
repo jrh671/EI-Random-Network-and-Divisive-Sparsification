@@ -18,7 +18,6 @@ end
 Single=1;
 PlotAntiCo=1;
 PlotStability=1;
-
 GenerateTuning=1;
 GenerateActivity=1;
 Plasticity=1;
@@ -69,9 +68,8 @@ for Context = ContextGoal
         MemoryLimit=20;
 
         % Chosen neurons for visualization 
-          Choose2NeuronsCA3=[1,2];% [6,10] and [8,53] . [6,10,15,18,19,38,66]
+          Choose2NeuronsCA3=[1,2];
 
-        % Define special location and radius
         special_location = [7, 2];
 
         if Epoch == 2 
@@ -80,9 +78,7 @@ for Context = ContextGoal
             special_radius = 0;
         end
    
-        
-        %% Run First Without Activity-Dependent-Plasticity
-        
+                
         SetParameters4D;
         
         if Context==1
@@ -156,4 +152,3 @@ for Context = ContextGoal
 disp(cellfun(@(x) sum(x)/N, MemoryCells))
 
 end
-

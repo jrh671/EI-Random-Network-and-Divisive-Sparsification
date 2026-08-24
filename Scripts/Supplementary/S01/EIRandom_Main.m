@@ -94,7 +94,6 @@ Sparsitydata{Instance} = Sparsity;
 end
 
 elseif PreRunData==1
-    addpath('./Data');
     addpath('./EI_Functions');
     addpath('./Helper_Functions');
     

@@ -84,7 +84,7 @@ for Epoch = PlottingEpochs
 
 
           % for t = [1,11,29,50,100]
-          Ti=[1,22,100];
+          Ti=[1,29,100];
 
         for G = 1:3
                 t=Ti(G);
@@ -142,8 +142,6 @@ Memory=activeMemoryCells;
     Step=2;
 Anti_Cofiring;
     Epoch = 2;
-    MapStability;
-
 elseif Context==2
     Epoch = 4;
     Step=3;
@@ -156,6 +154,7 @@ Anti_Cofiring;
     Epoch = 2;
 end
 
-
+MapStability;
 end
 
+ComputeAllMaps;

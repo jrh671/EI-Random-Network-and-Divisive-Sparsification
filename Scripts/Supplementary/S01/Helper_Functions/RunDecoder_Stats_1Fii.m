@@ -1,11 +1,8 @@
-% load('XtotT_array.mat')
 
 if Instance==1
 figure;
 end
-% hold on
 for idx = 1:(1 * 210)
-    % Calculate P and N based on idx
     sample = mod(idx-1, 10) + 1;
     Ohm = ceil(idx / 10);
 
@@ -26,7 +23,6 @@ if Instance<5
 Length=1:21;
 elseif Instance>5
 Length=3:3:21;
-% Length=1:21;
 end
 
 for L=1:10
@@ -38,7 +34,7 @@ Spikes=X{N,L};
 
 % 1: Plurality | 2: Template | 3: L1| 4: L2| 5: Linear
 if Decoder == 1
-    [decoding_error(N,L), neu_votes,decoded_pos] = plurality_voting_decoder(Spikes, integer_pos, excluded_p, time_bin_length);
+    [decoding_error(N,L), neu_votes,decoded_pos] = assembly_tagging_decoder(Spikes, integer_pos, excluded_p, time_bin_length);
 elseif Decoder == 2
     [decoding_error(N,L), decoded_positions, neu_votes] = template_matching_decoder(Spikes, integer_pos, excluded_p, time_bin_length);
 elseif Decoder == 3
@@ -51,23 +47,16 @@ end
 
 end
 end
-% 
-% plot(linspace(0,.1,21),decoding_error/max(decoding_error),'LineWidth',2)
-% % ylim([0 1])
 
-% Example NxL matrix
-% data = decoding_error./max(decoding_error); % 10 conditions (N=10) and 5 sets (L=5)
-data = decoding_error; % 10 conditions (N=10) and 5 sets (L=5)
+data = decoding_error; 
 
-% Calculating the mean and standard error for each condition
-means = mean(data, 2); % Mean across the second dimension
-std_errors = std(data, [], 2) / sqrt(size(data, 2)); % Standard Error of the Mean
+means = mean(data, 2); 
+std_errors = std(data, [], 2) / sqrt(size(data, 2)); 
 
-% Conditions (for x-axis)
 if Instance<2
-conditions = linspace(0,0.1,21); % Adjust this as per your conditions
+conditions = linspace(0,0.1,21); 
 elseif Instance>1
-conditions = linspace(0,0.1,21); % Adjust this as per your conditions
+conditions = linspace(0,0.1,21); 
 end
 
 
@@ -83,7 +72,6 @@ title('Predicted vs Actual Position MSE');
 elseif DecodePlot==2
         hErrorbar = errorbar(conditions, gradient(means), std_errors, '*', 'Color', Colors(Decoder), 'HandleVisibility', 'off');
     
-%     plot(conditions, gradient(means), '--', 'Color', colors(Instance, :), 'HandleVisibility', 'off');
 xlabel('Inhibitory Strength');
 ylabel('Decoding Error');
 title('Predicted vs Actual Position MSE');

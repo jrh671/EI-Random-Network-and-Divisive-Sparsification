@@ -21,7 +21,7 @@ noise_std = 0; % Uniform Noise
 MemoryLimit=20;
 
 % Chosen neurons for visualization 
-  Choose2NeuronsCA3=[2,7];% [6,10] and [8,53]
+  Choose2NeuronsCA3=[2,7];
 
 % Define special location and radius
 special_location = [7, 2];
@@ -51,9 +51,12 @@ SheetNoPlast =cumulative_activity_map_CA3(:,:,1);
 Traj1=trajectory;
 FRAve1=cumulative_activity_map_CA3;
 
-CalcOverdispersion;
+CalcPFSpread;
+
+%% Second Simulation (With Plasticity)
 
 VisualizePlasticity=1;
+
 QuickRun2;
 
 Overdispersion;

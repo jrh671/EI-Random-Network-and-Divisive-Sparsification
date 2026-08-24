@@ -16,8 +16,7 @@ T = 5000;         % Number of time steps
 noise_std=0;
 MemoryLimit=1000;
 
-% Chosen neurons for visualization 
-Choose2NeuronsCA3= [14,62];%[20,34]; %% Other Compatible Neurons: [7,16,93,99,97,100]]
+Choose2NeuronsCA3= [14,62];
 
 % Define special location and radius
 special_location = [7, 2];

@@ -39,7 +39,7 @@ for L = 1:nSamples
         % 1: Assembly Tagging | 2: Template | 3: L1 | 4: L2 | 5: Linear
         if Decoder == 1
             [decoding_error(N,L), neu_votes, decoded_pos] = ...
-                plurality_voting_decoder(Spikes, integer_pos, excluded_p);
+                assembly_tagging_decoder(Spikes, integer_pos, excluded_p);
 
         elseif Decoder == 2
             [decoding_error(N,L), decoded_positions, neu_votes] = ...

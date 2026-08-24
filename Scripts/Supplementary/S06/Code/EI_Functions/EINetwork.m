@@ -1,3 +1,5 @@
+pf_width=1/pf_width_.^2;
+
 for tt = 1:length(total_time_vec)
 
     pos = positions(tt);

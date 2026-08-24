@@ -7,9 +7,9 @@ for Epoch=1:2
 firing_rate_snapshots_CA3=Rates{Epoch};
 
 if Epoch == 1
-trajectory=Trajectory21;
+trajectory=Trajectory11;
 elseif Epoch == 2
-trajectory=Trajectory2;    
+trajectory=Trajectory1;    
 end
 
 chosen_neurons_CA3ave = 1:1:100;   % should contain up to 100 neuron indices

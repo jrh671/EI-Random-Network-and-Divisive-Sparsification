@@ -1,19 +1,18 @@
 if GenerateTuning==1
 
-% Generate the Neuron vs. Input Matrix (A) for CA3
+% Generate the Neuron vs. Input Matrix (A)
 rng(1); %Ensure Same Connections Across Simulations
 A_CA3 = alpha * rand(N, K);
 rng(Seed); %Set Seed For Tuning Changes (Remapping)
 
-% Initialize B as a cell array
 B = cell(K, 1);
-sigma = cell(N, 1); % Initialize sigma as a cell array
-rho = cell(N, 1);   % Initialize rho as a cell array
+sigma = cell(N, 1); 
+rho = cell(N, 1);   
 
-% Generate the Input vs. Position Matrix (B), sigma, and rho
+% Generate the Input vs. Position Matrix (B)
 for k = 1:K
     B{k} = zeros(P, P);
-    indices = randperm(P * P, n_pos); % Randomly pick n_pos positions for tuning
+    indices = randperm(P * P, n_pos); 
     B{k}(indices) = 1;
     Idx(k,:)=indices;
 end
@@ -43,8 +42,8 @@ end
 M_prim_CA3 = cell(N, 1);
 
 for i = 1:N
-sigma{i} = mu_sigma*ones(P, P); % Initialize with default sigma
-rho{i} = mu_rho*ones(P, P);     % Initialize with default rho
+sigma{i} = mu_sigma*ones(P, P);
+rho{i} = mu_rho*ones(P, P);    
 
     if sigma_sigma > 0
         if strcmp(distType, 'lognormal')
@@ -113,16 +112,13 @@ for i = 1:N
     end
 end
 
-% Initialize an array to store the peak activities of all neurons in CA3
 peak_activities_CA3 = zeros(N, 1);
 
-% Find the peak activity for each neuron in CA3
 for i = 1:N
     firing_matrix = firing_rates_CA3{i};
     peak_activities_CA3(i) = max(firing_matrix(:));
 end
 
-% Find the global maximum peak activity across all neurons in CA3
 global_peak_activity_CA3 = max(peak_activities_CA3);
 
 normalized_firing_rates_CA3 = cell(size(firing_rates_CA3));

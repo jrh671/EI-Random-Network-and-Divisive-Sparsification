@@ -69,9 +69,8 @@ for Context = ContextGoal
         MemoryLimit=20;
 
         % Chosen neurons for visualization 
-          Choose2NeuronsCA3=[1,2];% [6,10] and [8,53] . [6,10,15,18,19,38,66]
+          Choose2NeuronsCA3=[1,2];
 
-        % Define special location and radius
         special_location = [7, 2];
 
         if Epoch == 2 

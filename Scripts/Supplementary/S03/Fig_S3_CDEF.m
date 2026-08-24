@@ -5,7 +5,7 @@ addpath("Data/")
 load('/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Data/Supplementary/S03/PreRun_Data/Results_Unsaturated.mat')
 
 Activity=InputRates;
-[DE_PV_In, neu_votesPV, D_Pos_PV] = plurality_voting_decoder(Activity(:,31:end), IntegerPos, 0, 1);
+[DE_PV_In, neu_votesPV, D_Pos_PV] = assembly_tagging_decoder(Activity(:,31:end), IntegerPos, 0, 1);
 
 [DE_L, D_PosL] = linear_decoder(Activity(:,31:end), IntegerPos);
 [DE_L1_In, sparsity,D_PosL1,TestPos] = linear_decoder_with_l1(Activity(:,31:end), IntegerPos, lambda);
@@ -38,29 +38,26 @@ DE_L1_In
 DE_PV_In
 
 
-
-%%
-
-num_iterations = 100; % Number of random subsamplings
+num_iterations = 100; 
 num_neurons = size(Rates,1);
-num_timepoints = size(IntegerPos,2) - 90; % Adjust for indexing
+num_timepoints = size(IntegerPos,2) - 90;
 
 D_PosL_all = zeros(num_timepoints, num_iterations);
 D_Pos_PV_all = zeros(num_timepoints, num_iterations);
 
-num_example_trials = 5; % Number of example runs to plot
-example_trials = randi(num_iterations, num_example_trials, 1); % Select random runs to overlay
+num_example_trials = 5; 
+example_trials = randi(num_iterations, num_example_trials, 1); 
 
 for iter = 1:num_iterations
+    
     % Randomly subsample neurons
     Activity = InputRates(randi(size(InputRates,1), num_neurons, 1)', :);
     
     % Decode using Linear Regression
-    % [~, D_PosL] = linear_decoder(Activity(:,31:end), IntegerPos);
     [DE_L1, sparsity,D_PosL1,TestPos] = linear_decoder_with_l1(Activity(:,31:end), IntegerPos, lambda);
 
     % Decode using Plurality Voting
-    [~, ~, D_Pos_PV] = plurality_voting_decoder(Activity(:,31:end), IntegerPos, 0, 1);
+    [~, ~, D_Pos_PV] = assembly_tagging_decoder(Activity(:,31:end), IntegerPos, 0, 1);
     
     % Store results
     D_PosL_all(:, iter) = D_PosL1;
@@ -73,17 +70,12 @@ std_D_PosL = std(D_PosL_all, 0, 2);
 mean_D_Pos_PV = mean(D_Pos_PV_all, 2);
 std_D_Pos_PV = std(D_Pos_PV_all, 0, 2);
 
-% Plot Regression Results with Shaded Error and Example Trials
 figure; hold on;
 scatter(IntegerPos(91:end), mean_D_PosL, 'b', 'filled');
 
 
 SaveDecoder{2,1}=mean_D_PosL';
 
-
-% fill([IntegerPos(91:end), fliplr(IntegerPos(91:end))], ...
-%      [mean_D_PosL - std_D_PosL; flipud(mean_D_PosL + std_D_PosL)], ...
-%      'b', 'FaceAlpha', 0.2, 'EdgeColor', 'none');
 plot(min(IntegerPos(91:end)):max(IntegerPos(91:end)), min(IntegerPos(91:end)):max(IntegerPos(91:end)), 'r--');
 
 % Overlay example trials
@@ -101,12 +93,8 @@ scatter(IntegerPos(91:end), mean_D_Pos_PV, 'k', 'filled');
 
 SaveDecoder{2,2}=mean_D_Pos_PV';
 
-% fill([IntegerPos(91:end), fliplr(IntegerPos(91:end))], ...
-%      [mean_D_Pos_PV - std_D_Pos_PV; flipud(mean_D_Pos_PV + std_D_Pos_PV)], ...
-%      'k', 'FaceAlpha', 0.2, 'EdgeColor', 'none');
 plot(min(IntegerPos(91:end)):max(IntegerPos(91:end)), min(IntegerPos(91:end)):max(IntegerPos(91:end)), 'r--');
 
-% Overlay example trials
 for i = 1:num_example_trials
     plot(IntegerPos(91:end), D_Pos_PV_all(:, example_trials(i)), 'k', 'LineWidth', 0.8);
 end
@@ -120,7 +108,7 @@ legend('Linear Decoder')
 load('/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Data/Supplementary/S03/PreRun_Data/Results_Saturated.mat')
 
 Activity=InputRates;
-[DE_PV_In, neu_votesPV, D_Pos_PV] = plurality_voting_decoder(Activity(:,31:end), IntegerPos, 0, 1);
+[DE_PV_In, neu_votesPV, D_Pos_PV] = assembly_tagging_decoder(Activity(:,31:end), IntegerPos, 0, 1);
 
 [DE_L, D_PosL] = linear_decoder(Activity(:,31:end), IntegerPos);
 [DE_L1_In, sparsity,D_PosL1,TestPos] = linear_decoder_with_l1(Activity(:,31:end), IntegerPos, lambda);
@@ -157,9 +145,8 @@ DE_PV_In
 
 
 Activity=Rates;
-[DE_PV_Out, neu_votesPV, D_Pos_PV] = plurality_voting_decoder(Activity(:,31:end), IntegerPos, 0, 1);
+[DE_PV_Out, neu_votesPV, D_Pos_PV] = assembly_tagging_decoder(Activity(:,31:end), IntegerPos, 0, 1);
 
-% lambda=0.05;
 
 [DE_L1_Out, sparsity,D_PosL1,TestPos] = linear_decoder_with_l1(Activity(:,31:end), IntegerPos, lambda);
 [DE_L, D_PosL] = linear_decoder(Activity(:,31:end), IntegerPos);

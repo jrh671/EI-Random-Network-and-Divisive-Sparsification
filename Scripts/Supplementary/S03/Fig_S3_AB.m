@@ -2,11 +2,9 @@ load('/Users/josehurtado/Documents/MATLAB/Final_Manuscript/Random_EIPlaceNet_Dat
 
 Iteration=21;
 %% Compute Sparsity
-% Compute the mean and standard error of Sparsity across instances (columns)
-mean_Sparsity = mean(Sparsity, 2); % Mean across columns
+mean_Sparsity = mean(Sparsity, 2);
 stderr_Sparsity = std(Sparsity, 0, 2) / sqrt(size(Sparsity, 2)); % Standard error
 
-% Plot Sparsity with error bars
 Instance=1;
 if Instance == 1
 figure;
@@ -16,13 +14,11 @@ xlabel('Inhibition');
 ylabel('Sparsity');
 grid on;
 end
-% Compute the gradient (difference of adjacent elements) for each instance
+
 Susceptibility = diff(Sparsity);
 
-% Append a zero at the start for each column
 Susceptibility = [zeros(1, size(Susceptibility, 2)); Susceptibility];
 
-% Compute the mean and standard error of Susceptibility across instances
 mean_Susceptibility = mean(Susceptibility, 2);
 stderr_Susceptibility = std(Susceptibility, 0, 2) / sqrt(size(Susceptibility, 2));
 
@@ -42,9 +38,8 @@ for Across = 1:3
     Instance=Across;
 data=Data{Across};
 
-% Calculating the mean and standard error for each condition
-means = mean(data, 2); % Mean across the second dimension
-std_errors = std(data, [], 2) / sqrt(size(data, 2)); % Standard Error of the Mean
+means = mean(data, 2); 
+std_errors = std(data, [], 2) / sqrt(size(data, 2)); 
 
 SaveMeans{Across}=means;
 SaveSTDs{Across}=std_errors;
@@ -52,13 +47,13 @@ SaveSTDs{Across}=std_errors;
 
 % Conditions (for x-axis)
 if Across==1
-conditions = linspace(0,0.1,Iteration); % Adjust this as per your conditions
+conditions = linspace(0,0.1,Iteration); 
 Colors = 'k';
 elseif Across==2
 conditions1 = 0.0500*ones(1,Iteration);
-conditions2 = linspace(0,0.4,Iteration); % Adjust this as per your conditions
+conditions2 = linspace(0,0.4,Iteration); 
 elseif Across==3
-conditions = linspace(0,0.4,Iteration); % Adjust this as per your conditions
+conditions = linspace(0,0.4,Iteration); 
 Colors = 'b';
 end
 

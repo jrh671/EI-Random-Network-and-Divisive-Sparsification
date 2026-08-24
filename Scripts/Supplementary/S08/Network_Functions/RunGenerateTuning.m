@@ -1,7 +1,7 @@
 if GenerateTuning==1
 
 % Generate the Neuron vs. Input Matrix (A) for CA3
-rng(0); %Ensure Same Connections Across Simulations
+rng(1); %Ensure Same Connections Across Simulations
 A_CA3 = alpha * rand(N, K);
 rng(Seed); %Set Seed For Tuning Changes (Remapping)
 
@@ -9,7 +9,7 @@ rng(Seed); %Set Seed For Tuning Changes (Remapping)
 B = cell(K, 1);
 sigma = cell(N, 1); % Initialize sigma as a cell array
 rho = cell(N, 1);   % Initialize rho as a cell array
-Idx=[];
+
 % Generate the Input vs. Position Matrix (B), sigma, and rho
 for k = 1:K
     B{k} = zeros(P, P);

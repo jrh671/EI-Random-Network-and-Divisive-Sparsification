@@ -5,10 +5,9 @@ rng(1); %Ensure Same Connections Across Simulations
 A_CA3 = alpha * rand(N, K);
 rng(Seed); %Set Seed For Tuning Changes (Remapping)
 
-% Initialize B as a cell array
 B = cell(K, 1);
-sigma = cell(N, 1); % Initialize sigma as a cell array
-rho = cell(N, 1);   % Initialize rho as a cell array
+sigma = cell(N, 1); 
+rho = cell(N, 1);   
 
 % Generate the Input vs. Position Matrix (B), sigma, and rho
 for k = 1:K

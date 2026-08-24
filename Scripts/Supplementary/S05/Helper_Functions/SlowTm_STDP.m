@@ -91,30 +91,15 @@ W_II = 0;%rand(n_inhib, n_inhib);
 W_EI = rand(n_excit, n_inhib); 
 W_IE = rand(n_inhib, n_excit);
 
-% W_EE(W_EE > prob_E_recurrent_connectivity) = 0;
-% W_EE(diag(ones(1,n_excit)) == 1) = 0;       % no neurons can connect recurrently to themselves
-% W_EE=W_EE/max(W_EE,[],'all');
-% W_EE = W_EE * initial_weight_max_EE;
-% 
-% W_II(W_II > prob_I_I_connectivity) = 0;
-% W_II(diag(ones(1,n_inhib)) == 1) = 0;       % no neurons can connect recurrently to themselves
-% W_II=W_II/max(W_II,[],'all');
-% W_II = W_II * initial_weight_max_II;
 
-
-% W_EI(W_EI > prob_E_I_connectivity) = 0;
-% W_EI=W_EI/max(W_EI,[],'all');
 W_EI = W_EI * InitialWeight; 
-
-% W_IE(W_IE > prob_I_E_connectivity) = 0;
-% W_IE=W_IE/max(W_IE,[],'all');
 W_IE = W_IE * InitialWeight;
 
 
 %% Running the network 
 % Determining the speed of the animal running through the track
 mean_dt = dt; sigma_dt = 0;              % time scale of updating activity
-mean_v = (1); %%CHANGE DIRECTION 
+mean_v = (1); 
 sigma_v = 0;                    % mean and std speed of animal
 
 dt_vec = normrnd(mean_dt, sigma_dt, 1, ceil(n_steps/mean_dt));
@@ -122,7 +107,7 @@ dt_vec(dt_vec < 0 ) = 0;
 total_time_vec = cumsum(dt_vec);
 v_vec0 = normrnd(mean_v, sigma_v, 1, ceil(n_steps/mean_dt)); 
 v_vec = [0, v_vec0];
-v_vec(v_vec < 0) = 0; %% CHANGE INEQUALITY
+v_vec(v_vec < 0) = 0; 
 
 % Determining the path of the animal running through the track
 positions = 0.5 * (v_vec(1:end-1) + v_vec(2:end)) .* dt_vec; % generating the positions at each time step from dt and the difference in velocities (trying to make it smooth)
@@ -133,95 +118,60 @@ pf_cell=pf_cell1;
 
 RunSlowTm_STDP;
 
-% Now you can save the results outside the parfor loop
     % Construct a unique filename for each iteration
     filename = sprintf('./SavedFiles/resultsFastSTDP1.mat');
     % Save the results
     save(filename, 'results');
 
-        % Construct a unique filename for each iteration
     filename2 = './SavedFiles/W_InputEFastSTDP1.mat';
-    % Save the results
     save(filename2, 'W_inputE');
 
-    % Construct a unique filename for each iteration
     filename3 = './SavedFiles/PF_CellFastSTDP1.mat';
-    % Save the results
     save(filename3, 'pf_cell1');
 
-        % Construct a unique filename for each iteration
     filename4 = './SavedFiles/Mean_EIFastSTDP1.mat';
-    % Save the results
     save(filename4, 'Mean_EI');
 
-    % Construct a unique filename for each iteration
     filename5 = './SavedFiles/Mean_IEFastSTDP1.mat';
-    % Save the results
     save(filename5, 'Mean_IE');
 
-    % Construct a unique filename for each iteration
     filename6 = './SavedFiles/PosSTDP1.mat';
-    % Save the results
     save(filename6, 'POS');
 
 pf_cell=pf_cell2;
 
-W_EE = 0;%rand(n_excit, n_excit); 
-W_II = 0;%rand(n_inhib, n_inhib); 
+W_EE = 0;
+W_II = 0;
 W_EI = rand(n_excit, n_inhib); 
 W_IE = rand(n_inhib, n_excit);
 
-% W_EE(W_EE > prob_E_recurrent_connectivity) = 0;
-% W_EE(diag(ones(1,n_excit)) == 1) = 0;       % no neurons can connect recurrently to themselves
-% W_EE=W_EE/max(W_EE,[],'all');
-% W_EE = W_EE * initial_weight_max_EE;
-% 
-% W_II(W_II > prob_I_I_connectivity) = 0;
-% W_II(diag(ones(1,n_inhib)) == 1) = 0;       % no neurons can connect recurrently to themselves
-% W_II=W_II/max(W_II,[],'all');
-% W_II = W_II * initial_weight_max_II;
 
-
-% W_EI(W_EI > prob_E_I_connectivity) = 0;
-% W_EI=W_EI/max(W_EI,[],'all');
 W_EI = W_EI * InitialWeight; 
 
-% W_IE(W_IE > prob_I_E_connectivity) = 0;
-% W_IE=W_IE/max(W_IE,[],'all');
+
 W_IE = W_IE * InitialWeight;
 
 
 
 RunSlowTm_STDP;
 
-% Now you can save the results outside the parfor loop
     % Construct a unique filename for each iteration
     filename = sprintf('./SavedFiles/resultsFastSTDP2.mat');
     % Save the results
     save(filename, 'results');
 
-        % Construct a unique filename for each iteration
     filename2 = './SavedFiles/W_InputEFastSTDP2.mat';
-    % Save the results
     save(filename2, 'W_inputE');
 
-    % Construct a unique filename for each iteration
     filename3 = './SavedFiles/PF_CellFastSTDP2.mat';
-    % Save the results
     save(filename3, 'pf_cell2');
 
-        % Construct a unique filename for each iteration
     filename4 = './SavedFiles/Mean_EIFastSTDP2.mat';
-    % Save the results
     save(filename4, 'Mean_EI');
 
-    % Construct a unique filename for each iteration
     filename5 = './SavedFiles/Mean_IEFastSTDP2.mat';
-    % Save the results
     save(filename5, 'Mean_IE');
 
-    % Construct a unique filename for each iteration
     filename6 = './SavedFiles/PosSTDP2.mat';
-    % Save the results
     save(filename6, 'POS');
 

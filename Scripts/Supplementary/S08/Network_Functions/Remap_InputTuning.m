@@ -1,5 +1,4 @@
 rng(Seed)
-% Initialize B as a cell array
 B = cell(K, 1);
 sigma = cell(K, 1); % Initialize sigma as a cell array
 rho = cell(K, 1);   % Initialize rho as a cell array
@@ -35,8 +34,8 @@ end
 
 M_prim_CA3 = cell(N, 1);
 for i = 1:N
-    sigma{i} = mu_sigma*ones(P, P); % Initialize with default sigma
-    rho{i} = mu_rho*ones(P, P);     % Initialize with default rho
+    sigma{i} = mu_sigma*ones(P, P); 
+    rho{i} = mu_rho*ones(P, P);     
 
     if sigma_sigma > 0
         if strcmp(distType, 'lognormal')
@@ -66,7 +65,6 @@ for i = 1:N
     end
 end
 
-% Add noise and normalize again for CA3
 M_prime_CA3 = cell(N, 1);
 for i = 1:N
     Noise = alpha_p * pinknoise(P * P);
@@ -102,16 +100,14 @@ for i = 1:N
     end
 end
 
-% Initialize an array to store the peak activities of all neurons in CA3
 peak_activities_CA3 = zeros(N, 1);
 
-% Find the peak activity for each neuron in CA3
+% Find the peak activity for each neuron 
 for i = 1:N
     firing_matrix = firing_rates_CA3{i};
     peak_activities_CA3(i) = max(firing_matrix(:));
 end
 
-% Find the global maximum peak activity across all neurons in CA3
 global_peak_activity_CA3 = max(peak_activities_CA3);
 
 normalized_firing_rates_CA3 = cell(size(firing_rates_CA3));

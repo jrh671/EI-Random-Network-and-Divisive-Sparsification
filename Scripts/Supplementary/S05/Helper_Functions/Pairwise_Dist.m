@@ -1,5 +1,5 @@
 %% ===== Pairwise distances on Figure 2 windows (FavPos; circular embedding) =====
-% Requires: FavPos1, FavPos2, P  (from your Figure 2 block)
+% Requires: FavPos1, FavPos2, P  
 
 assert(exist('FavPos1','var')==1 && exist('FavPos2','var')==1, 'FavPos1/2 not found.');
 assert(exist('P','var')==1, 'P (position bins) not found.');
@@ -12,7 +12,7 @@ assert(any(valid1) && any(valid2), 'No valid windows in one or both contexts.');
 FP1 = FavPos1(:, valid1);   % [N x W1]
 FP2 = FavPos2(:, valid2);   % [N x W2]
 
-% --- Circular unit-circle embedding per neuron (respects wrap-around) ---
+% --- Circular unit-circle embedding per neuron ---
 favpos_embed = @(FP) [cos(2*pi*(FP-1)/P).',  sin(2*pi*(FP-1)/P).'];  % -> [W x 2N]
 
 E1 = favpos_embed(FP1);   % [W1 x 2N]
@@ -40,9 +40,8 @@ Sheet4a = D_WITHIN;
 
 Sheet4b = D_ACROSS;
 
-% Fill box colors with thicker edges
 boxes = findobj(gca,'Tag','Box');
-fillColors = [1 1 1; 0.5 0.5 0.5];  % white, gray
+fillColors = [1 1 1; 0.5 0.5 0.5];  
 for j = 1:numel(boxes)
     patch(get(boxes(j),'XData'), get(boxes(j),'YData'), ...
           fillColors(numel(boxes)-j+1,:), ...

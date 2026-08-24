@@ -130,27 +130,27 @@ if VisualizePlasticity==0
 if Context==1
     Epoch = 4;
 Anti_Cofiring;
-SheetCtx1Epoch1=sortedKendallTauMatrix;
+SheetCtx1Epoch1=sortedPearsonMatrix;
 Sort=sortedIndices;
 Memory=activeMemoryCells;
    Epoch = 6;
 
 Anti_Cofiring;
 
-    SheetCtx1Epoch2=sortedKendallTauMatrix;
+    SheetCtx1Epoch2=sortedPearsonMatrix;
 
     Epoch = 2;
 elseif Context==2
     Epoch = 4;
 
 Anti_Cofiring;
-SheetCtx2Epoch2=sortedKendallTauMatrix;
+SheetCtx2Epoch2=sortedPearsonMatrix;
 
 Sort=sortedIndices;
 Memory=activeMemoryCells;
     Epoch = 6;
 Anti_Cofiring;
-SheetCtx2Epoch1=sortedKendallTauMatrix;
+SheetCtx2Epoch1=sortedPearsonMatrix;
 
     Epoch = 2;
 end

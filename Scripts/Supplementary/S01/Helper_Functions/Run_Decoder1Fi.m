@@ -9,7 +9,7 @@ Positions = ceil(SlidingAverage_s_mean(integer_pos,mean_dt));
 
 % 1: Plurality | 2: Template | 3: L1| 4: L2| 5: Linear
 if Decoder == 1
-    [decoding_error, neu_votes,decoded_pos] = plurality_voting_decoder(Spikes, Positions, excluded_p);
+    [decoding_error, neu_votes,decoded_pos] = assembly_tagging_decoder(Spikes, Positions, excluded_p);
 elseif Decoder == 2
     [decoding_error, decoded_positions, neu_votes] = template_matching_decoder(Spikes, Positions, excluded_p);
 elseif Decoder == 3

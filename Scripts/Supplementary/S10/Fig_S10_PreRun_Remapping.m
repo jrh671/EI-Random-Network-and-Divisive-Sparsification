@@ -31,10 +31,7 @@ MemoryCells = cell(8,1);
 TemporalRates = cell(8,1);
 TemporalSpikes = cell(8,1);
 
-
 ContextGoal = 1; 
-
-
 
 for Context = ContextGoal
     clear MCells MemoryCells

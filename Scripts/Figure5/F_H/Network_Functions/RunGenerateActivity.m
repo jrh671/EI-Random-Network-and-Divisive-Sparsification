@@ -1,4 +1,3 @@
-%% Optimized Simulation of Recurrent and Skip Connections
 
 if Epoch == 1 || Epoch == 0
 % Initialize variables and connections
@@ -194,11 +193,18 @@ end
     firing_rate_snapshots_CA3{t} = snapshot_CA3;
 end
 
+
 if Context==1 && Epoch ==2
     TagTime1=IsTrue;
      Memory1=memory_neurons_CA3;
      Trajectory1=trajectory;
      FiringRates1=firing_rate_snapshots_CA3;
+
+elseif Context==2 && Epoch ==1
+    TagTime21=IsTrue;
+     Memory21=memory_neurons_CA3;
+     Trajectory21=trajectory;
+     FiringRates21=firing_rate_snapshots_CA3;
 
 elseif Context==2 && Epoch ==2
     TagTime2=IsTrue;

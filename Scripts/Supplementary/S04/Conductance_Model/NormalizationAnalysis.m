@@ -21,7 +21,7 @@
 % Data location and analysis settings
 %% ------------------------------------------------------------
 
-PreRun_Data=0; %0 For Newly Simulated Data
+PreRun_Data=1; %0 For Newly Simulated Data
 
 if PreRun_Data==1
 data_dir = [ ...

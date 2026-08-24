@@ -165,9 +165,7 @@ for Context = ContextGoal
     end
 
     Visualize2DMaps;
-% 
-% 'Proportion Tagged Cells'
-% disp(cellfun(@(x) sum(x)/N, MemoryCells))
+
 
 end
 end

@@ -1,19 +1,15 @@
 
 if Average==1
-% Calculate the mean and SEM
+
 numNeurons = length(Yall);
 
-% Assuming all X1 arrays are identical (shared radial distances)
-[~, maxIdx] = max(cellfun(@length, Xall)); % Find index of longest cell element
-X1 = Xall{maxIdx}; % Extract the longest cell element
+[~, maxIdx] = max(cellfun(@length, Xall)); 
+X1 = Xall{maxIdx}; 
 
-% Determine the maximum length of vectors in Y1all
 maxLength = nanmax(cellfun(@length, Yall));
 
-% Pad each Y1 vector with NaN to make all vectors the same length
 Y1Padded = cellfun(@(y) [y, nan(1, maxLength - length(y))], Yall, 'UniformOutput', false);
 
-% Convert the padded cell array to a matrix
 Y1Matrix = cell2mat(Y1Padded'); % Each column corresponds to a neuron
 
 % Calculate the mean and SEM across neurons
@@ -46,23 +42,19 @@ Visualize2DMaps;
 
 
 
-CalcOverdispersion;
+CalcPFSpread;
 
 if Average == 1
-% Calculate the mean and SEM
+
 numNeurons = length(Yall);
 
-% Assuming all X1 arrays are identical (shared radial distances)
-[~, maxIdx] = max(cellfun(@length, Xall)); % Find index of longest cell element
-X2 = Xall{maxIdx}; % Extract the longest cell element
+[~, maxIdx] = max(cellfun(@length, Xall)); 
+X2 = Xall{maxIdx}; 
 
-% Determine the maximum length of vectors in Y1all
 maxLength = nanmax(cellfun(@length, Yall));
 
-% Pad each Y1 vector with NaN to make all vectors the same length
 Y2Padded = cellfun(@(y) [y, nan(1, maxLength - length(y))], Yall, 'UniformOutput', false);
 
-% Convert the padded cell array to a matrix
 Y2Matrix = cell2mat(Y2Padded'); % Each column corresponds to a neuron
 
 % Calculate the mean and SEM across neurons

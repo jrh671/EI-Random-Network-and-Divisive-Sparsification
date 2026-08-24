@@ -1,4 +1,3 @@
-%% Optimized Simulation of Recurrent and Skip Connections
 
 rng(220) %For Figures Reproducibility
 

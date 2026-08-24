@@ -17,7 +17,7 @@ CollectAvoidRates = cell(1,numSims);
 
 Recall=1; 
 
-% Specify the indices of the files you want to use (choose any 10 out of 12)
+% Specify the indices of the simulation
 selectedIndices = 1:numSims;  % Choose 10 Separate Simulations
 FigureToPlot = 1;
 

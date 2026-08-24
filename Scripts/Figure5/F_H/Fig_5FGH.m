@@ -2,7 +2,7 @@ clear;close all;clc
 addpath('./Network_Functions');
 
 VisualizePlasticity=1; % To Visualize Plasticity (1) OR Anti-CoFiring Stats (0)
-PreRun_Load=1; %Load already ran simulations| 0 to run new simulation defined by seed1 and seed2.
+PreRun_Load=1; %Load already specified environments| 0 to run new simulation environments defined by seed1 and seed2.
 
 %% These are preset environments determined by the random seeds.
 
